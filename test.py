@@ -69,6 +69,7 @@ meets = ['Date', 'Time', 'Days', 'Location', 'Instructor']
 course = '<h2>(.*)<\/h2>\n.*<p>(.*)<\/p>\n.*<p>(.*)</p>[\s\S]*Section (\d\d\d)<\/th>\n.*<th>(.*)<\/th>[\s\S]*Class Number.*>(\d{5})'
 patt = re.compile(course)
 
+
 #conn = psycopg2.connect("dbname='cache' port='10767' user='super' host='pyParty-767.postgres.pythonanywhere-services.com' password='lemonLime'")
 #cur = conn.cursor()
 '''
