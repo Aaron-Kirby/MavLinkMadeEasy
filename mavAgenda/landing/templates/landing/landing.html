@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MavLINK Made Easy - Landing Page</title>
+</head>
+<body>
+    <div class="select-degree" style="text-align:center">
+        <h3>Select your degree:</h3>
+
+        <form method="post" action="/MavLinkMadeEasy/mavAgenda/templates/mme/landing.html">
+
+            <p>
+                <select>
+                    <option selected disabled hidden>Select degree</option>
+                    <option value="Bachelor's">Bachelor's</option>
+                    <option value="Master's">Master's</option>
+                    <option value="Doctorate">Doctrate</option>
+                </select>
+                of
+                <select>
+                    <option selected disabled hidden>Select college</option>
+                    <option value="Science">Science</option>
+                    <option value="Other">More Options Coming Soon!</option>
+                </select>
+                in
+                <select>
+                    <option selected disabled hidden>Select degree</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Other">More Majors Coming Soon!</option>
+                </select>
+            </p></br></br>
+            <button type="submit">Next</button>
+        </form>
+    </div>
+</body>
+</html>

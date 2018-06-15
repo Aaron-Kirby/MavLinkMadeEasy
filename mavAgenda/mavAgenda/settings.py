@@ -25,7 +25,8 @@ SECRET_KEY = '%2l*)$2)_b&_jnneora-&)ijpv@@44sm=gg#jxm$xn#u55nvpj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'pyParty.pythonanywhere.com']
+#ALLOWED_HOSTS = [u'pyParty.pythonanywhere.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mavAgenda.apps.MavAgendaConfig',
 ]
 
 MIDDLEWARE = [
