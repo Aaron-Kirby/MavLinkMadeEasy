@@ -18,7 +18,7 @@ class DegreePath(models.Model):
     degree = models.CharField(max_length=75)
     course_name = models.CharField(max_length=75)
 
-class Courses(models.Model):
+class Course(models.Model):
     course_name = models.CharField(max_length=75)
     course_number = models.CharField(max_length=75)
     prereqs = ArrayField(
