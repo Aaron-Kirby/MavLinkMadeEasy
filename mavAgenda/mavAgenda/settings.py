@@ -25,7 +25,7 @@ SECRET_KEY = '*qrq68*8=&=gu%*6u5@3qz=votywl-+830@wacwtyxf@t(6!yz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pyParty.pythonanywhere.com']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'landing', # landing app
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'mavAgenda.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'mavAgenda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'catalog',
+        'USER': 'super',
+        'PASSWORD': 'lemonLime',
+        'HOST': 'pyParty-767.postgres.pythonanywhere-services.com',
+        'PORT': '10767',
     }
 }
 
