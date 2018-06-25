@@ -4,7 +4,9 @@ from django.template import loader
 from django.http import Http404
 from django.urls import reverse
 
-from .models import Question
+from .models import User
+from .models import DegreePath
+from .models import Courses
 
 def firstPage(request):
     return render(request, 'landing/firstPage.html')

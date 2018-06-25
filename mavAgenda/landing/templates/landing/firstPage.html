@@ -8,9 +8,12 @@
     <div class="page header" w3-include-html="heading.html"></div>
     <div class="select-degree" style="text-align:center">
         <h3>Select your degree:</h3>
+
+         <form method="post" action="/MavLinkMadeEasy/mavAgenda/templates/mme/landing.html">
         <p>
             <select>
                 <option selected disabled hidden>Select degree</option>
+                <!-- Eventually, we'd want this coming from a database -->
                 <option value="Bachelor's">Bachelor's</option>
                 <option value="Master's">Master's</option>
                 <option value="Doctorate">Doctrate</option>
@@ -18,12 +21,14 @@
             of
             <select>
                 <option selected disabled hidden>Select college</option>
+                <!-- Eventually, we'd want this coming from a database -->
                 <option value="Science">Science</option>
                 <option value="Other">More Options Coming Soon!</option>
             </select>
             in
             <select>
                 <option selected disabled hidden>Select degree</option>
+                <!-- Eventually, we'd want this coming from a database -->
                 <option value="Computer Science">Computer Science</option>
                 <option value="Other">More Majors Coming Soon!</option>
             </select>
@@ -31,7 +36,6 @@
         </br>
         </br>
 
-        <form method="post" action="/MavLinkMadeEasy/mavAgenda/templates/mme/landing.html">
             <button type="submit">Next</button>
         </form>
 
