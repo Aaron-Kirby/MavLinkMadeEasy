@@ -1,23 +1,26 @@
+# Create your models here.
 from django.db import models
-import datetime
-from django.utils import timezone
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+class User(models.Model):
+    email = models.CharField(max_length=75)
+    major = models.CharField(max_length=75)
+    track = models.CharField(max_length=75)
+    degree = models.CharField(max_length=75)
+    classes_taken = ArrayField(
+        models.CharField(max_length=75)
+    )
 
-    def __str__(self):
-        return self.question_text
+class DegreePath(models.Model):
+    major = models.CharField(max_length=75)
+    track = models.CharField(max_length=75)
+    degree = models.CharField(max_length=75)
+    course_name = models.CharField(max_length=75)
 
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.choice_text
+class Courses(models.Model):
+    course_name = models.CharField(max_length=75)
+    course_number = models.CharField(max_length=75)
+    prereqs = ArrayField(
+        models.CharField(max_length=75)
+    )
