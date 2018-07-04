@@ -8,8 +8,11 @@ from .models import User
 from .models import DegreePath
 from .models import Courses
 
-def firstPage(request):
-    return render(request, 'landing/firstPage.html')
+def selectdegree(request):
+    return render(request, 'landing/selectdegree.html')
+
+def login(request):
+    return render(request, 'landing/login.html')
     
     
 
