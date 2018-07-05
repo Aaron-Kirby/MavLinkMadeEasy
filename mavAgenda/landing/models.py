@@ -28,10 +28,10 @@ class RequirementCategories(models.Model):
     corenumbercredits = models.IntegerField()
     english = models.IntegerField()
     englishnumbercredits = models.IntegerField()
-    math = models.Integer()
-    mathnumbercredits = models.Integer()
-    speech = models.Integer()
-    speechnumbercredits = models.Integer()
+    math = models.IntegerField()
+    mathnumbercredits = models.IntegerField()
+    speech = models.IntegerField()
+    speechnumbercredits = models.IntegerField()
     # add as needed?
     def ___str___(self):
         return "yay!"
@@ -45,7 +45,7 @@ class Course(models.Model):
         return self.coursenumber
 
 class CoursePrereqs(models.Model):
-    coursenumber = models.ForeignKey(Course)
+    coursenumber = models.ForeignKey('Course', on_delete=models.CASCADE,)
     def ___str___(self):
         return self.coursenumber
 
@@ -56,21 +56,21 @@ class CoursePrereqs(models.Model):
 
 
 class CoreCourse(models.Model):
-    coursenumber = models.ForeignKey(Course)
+    coursenumber = models.ForeignKey('Course', on_delete=models.CASCADE,)
     def ___str___(self):
         return self.coursenumber
 
 class EnglishCourse(models.Model):
-    coursenumber = models.ForeignKey(Course)
+    coursenumber = models.ForeignKey('Course', on_delete=models.CASCADE,)
     def ___str___(self):
         return self.coursenumber
 
 class MathCourse(models.Model):
-    coursenumber = models.ForeignKey(Course)
+    coursenumber = models.ForeignKey('Course', on_delete=models.CASCADE,)
     def ___str___(self):
         return self.coursenumber
 
 class SpeechCourse(models.Model):
-    coursenumber = models.ForeignKey(Course)
+    coursenumber = models.ForeignKey('Course', on_delete=models.CASCADE,)
     def ___str___(self):
         return self.coursenumber

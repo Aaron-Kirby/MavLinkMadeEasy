@@ -5,9 +5,15 @@ from django.http import Http404
 from django.urls import reverse
 
 from .models import User
-from .models import DegreePath
-from .models import Courses
-from .forms import LoginForm
+from .models import UserCompleted
+from .models import PossibleDegrees
+from .models import RequirementCategories
+from .models import Course
+from .models import CoursePrereqs
+from .models import CoreCourse
+from .models import EnglishCourse
+from .models import MathCourse
+from .models import SpeechCourse
 
 #def selectdegree(request):
     #return render(request, 'landing/selectdegree.html')
