@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MavLINK Made Easy - Select Courses Completed</title>
 </head>
 <body>
+
+<!--
+{%
+c = sqlite3.connect('django.db.backends.sqlite3')
+cur = c.cursor()
+cur.execute("SELECT * from courses where degreetrack='BS' and major='Computer Science'")
+test = cur.fetchall()
+%}
+    <div>
+        <table>
+            {% for row in test %}
+        <tr>
+            <th> {{ row }}</th>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+-->
+
+<h3>Select Courses</h3>
+<p>Please place a check mark next to the classes you have completed</p>
+
+<div class="semester">
+    <p>Testing1</p>
+    <p>Testing2</p>
+</div>
+<div>
+    <p>Testing3</p>
+    <p>Testing4</p>
+</div>
 
 </body>
 </html>

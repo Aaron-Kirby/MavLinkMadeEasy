@@ -5,6 +5,11 @@
     <title>MavLINK Made Easy - Landing Page</title>
 </head>
 <body>
-Login!
+<h3>Please login!</h3>
+<form action="/email/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
 </body>
 </html>
