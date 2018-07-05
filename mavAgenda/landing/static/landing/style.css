@@ -1,3 +1,8 @@
+.semester {
+    border: red;
+    border-width: thick;
+}
+
 @font-face {
             font-family: "Quotus-Bold";
             src: url("C:/Users/bqacos/DjangoWorkspace/chatbot/Quotus-Bold.ttf");
@@ -39,9 +44,4 @@
             padding: 8px;
             margin: 6px;
             border-radius: 4px;
-        }
-
-        .semester {
-            border: red;
-            border-width: thick;
         }
