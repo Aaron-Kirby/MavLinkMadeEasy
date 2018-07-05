@@ -1,0 +1,47 @@
+@font-face {
+            font-family: "Quotus-Bold";
+            src: url("C:/Users/bqacos/DjangoWorkspace/chatbot/Quotus-Bold.ttf");
+        }
+
+        .MAVfont {
+            font-family: Arial;
+        }
+
+        .select {
+            font-family:Quotus-Bold;
+            text-align:center;
+        }
+
+        .email {
+            font-size: 24pt;
+            text-align:center;
+            font-family:Quotus-Bold;
+            margin-top: 10px;
+        }
+
+        .MAVbutton {
+            padding: 8px 86px;
+            margin: 4px;
+            background-color: white;
+            border: 2px solid #ff0400;
+            color: black;
+            border-radius: 4px;
+            font-size: 12pt;
+            font-family:Quotus-Bold;
+        }
+
+        .MAVbutton:hover {
+            background-color: #ff0400;
+            color: white;
+        }
+
+        .MAVselect {
+            padding: 8px;
+            margin: 6px;
+            border-radius: 4px;
+        }
+
+        .semester {
+            border: red;
+            border-width: thick;
+        }
