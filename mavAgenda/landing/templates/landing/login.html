@@ -5,11 +5,20 @@
     <title>MavLINK Made Easy - Landing Page</title>
 </head>
 <body>
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
+
+    <img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+
 <h3>Please login!</h3>
-<form action="/email/" method="post">
+
+<form action="{% url 'landing:schedule' %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    <input type="text" name="email"/>
     <input type="submit" value="Submit" />
 </form>
+
 </body>
 </html>
