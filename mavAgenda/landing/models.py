@@ -1,31 +1,76 @@
 from django.db import models
-#from django.contrib.postgres.fields import ArrayField #this element is specific to postgres
 
 # Create your models here.
 class User(models.Model):
     email = models.CharField(max_length=75)
-    major = models.CharField(max_length=75)
     degreetrack = models.CharField(max_length=75)
+    major = models.CharField(max_length=75)
     classtaken = models.CharField(max_length=75)
-    #classes_taken = ArrayField(
-    #    models.CharField(max_length=75)
-    #)
     def __str__(self):
         return self.email
 
-class DegreePath(models.Model):
-    major = models.CharField(max_length=75)
-    degreetrack = models.CharField(max_length=75)
-    course_name = models.CharField(max_length=75)
-    def __str__(self):
-        return self.major
+class UserCompleted(models.Model):
+    user = models.IntegerField() # how to get the id from user as its own field
+    coursenumber = models.CharField(max_length=75)
+    def ___str___(self):
+        return self.coursenumber
 
-class Courses(models.Model):
-    course_name = models.CharField(max_length=75)
-    course_number = models.CharField(max_length=75)
-    prerequisite = models.CharField(max_length=75)
-    #prereqs = ArrayField(
-    #    models.CharField(max_length=75)
-    #)
-    def __str__(self):
-        return self.course_name
+class PossibleDegrees(models.Model):
+    degree = models.CharField(max_length=10)
+    major = models.CharField(max_length=75)
+    def ___str___(self):
+        return self.degree + " in " + self.major
+
+
+class RequirementCategories(models.Model):
+    #how to get id
+    core = models.IntegerField()
+    corenumbercredits = models.IntegerField()
+    english = models.IntegerField()
+    englishnumbercredits = models.IntegerField()
+    math = models.Integer()
+    mathnumbercredits = models.Integer()
+    speech = models.Integer()
+    speechnumbercredits = models.Integer()
+    # add as needed?
+    def ___str___(self):
+        return "yay!"
+
+class Course(models.Model):
+    coursename = models.CharField(max_length=75)
+    coursenumber = models.CharField(max_length=75)
+    semesteravailable = models.CharField(max_length=1) #A for all, S for spring, F for fall
+    numbercredits = models.IntegerField()
+    def ___str___(self):
+        return self.coursenumber
+
+class CoursePrereqs(models.Model):
+    coursenumber = models.ForeignKey(Course)
+    def ___str___(self):
+        return self.coursenumber
+
+
+
+###########################3
+
+
+
+class CoreCourse(models.Model):
+    coursenumber = models.ForeignKey(Course)
+    def ___str___(self):
+        return self.coursenumber
+
+class EnglishCourse(models.Model):
+    coursenumber = models.ForeignKey(Course)
+    def ___str___(self):
+        return self.coursenumber
+
+class MathCourse(models.Model):
+    coursenumber = models.ForeignKey(Course)
+    def ___str___(self):
+        return self.coursenumber
+
+class SpeechCourse(models.Model):
+    coursenumber = models.ForeignKey(Course)
+    def ___str___(self):
+        return self.coursenumber
