@@ -23,5 +23,16 @@
     <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
 </form>
 
+</br>
+</br>
+
+<form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="post">
+    {% csrf_token %}
+
+    <p align="center">not a user?
+    <input type="submit" value="sign up!" class="MAVbutton"  style="padding: 8px 8px"/>
+    </p>
+</form>
+
 </body>
 </html>
