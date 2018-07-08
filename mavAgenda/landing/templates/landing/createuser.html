@@ -8,9 +8,9 @@
 
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'landing/css/style.css' %}" />
 
-<img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+<img src="{% static "landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
 
 <form class="email" id = "email" action="{% url 'landing:selectcourses' %}" method="post">
 
