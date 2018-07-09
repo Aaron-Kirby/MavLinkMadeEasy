@@ -3,5 +3,5 @@ find . -path "*/migrations/*.pyc"  -delete
 rm db.sqlite3
 python manage.py makemigrations
 python manage.py migrate
-python manage.py --run-syncdb
+python manage.py migrate --run-syncdb
 python manage.py createsuperuser
