@@ -1,0 +1,357 @@
+NAME: 
+
+STUDENT ID#: 
+
+LAST UPDATED: 
+
+General Education Requirements
+
+ENGLISH COMPOSITION (9 CREDIT HRS)
+
+Grade
+
+Cr
+
+Notes
+
+Course Name
+Composition I
+Composition II
+Adv Comp for IS&T
+
+Course #
+ENGL 1150
+ENGL 1160
+CIST 3000
+Remaining:
+
+Course #
+CMST 1110 
+CMST 2120
+Remaining:
+
+Course #
+MATH 1310 or test out
+Remaining:
+
+9
+
+Compl:
+
+0
+MATHEMATICS (3 CREDIT HRS)
+Cr
+
+Grade
+
+Course Name
+
+3
+
+Compl:
+
+0
+PUBLIC SPEAKING (3 CREDIT HRS)
+Course Name
+Cr
+Public Speaking
+-OR- Debate
+3
+
+Compl:
+
+Grade
+
+0
+
+Notes
+
+Notes
+
+HUMANITIES (9 CREDIT HRS)
+
+Course #
+CIST 3110
+
+Course Name
+IT Ethics
+
+Grade
+
+ -
+
+Cr
+ -
+
+Notes
+
+Remaining:
+
+Course #
+CIST 2100
+
+6
+
+Compl:
+
+0
+SOCIAL SCIENCE (9 CREDIT HRS)
+Cr
+*
+
+Course Name
+Orgs, Apps & Tech
+
+Grade
+
+*
+
+Notes
+
+Remaining:
+
+6
+
+Compl:
+
+0
+
+NATURAL/PHYSICAL SCIENCE (7 CREDIT HRS)
+
+Course #
+
+Course Name
+
+Grade
+
+Cr
+
+Notes
+
+Lab
+
+Include 2 different areas; 1 with a lab
+Remaining:
+
+7
+
+Compl:
+
+0
+
+GLOBAL DIVERSITY COURSE (3 CREDIT HRS)
+
+Course #
+
+Course Name
+
+Grade
+
+Cr
+
+Notes
+
+Course #
+
+US DIVERSITY COURSE (3 CREDIT HRS)
+Course Name
+
+Grade
+
+Cr
+
+ 
+
+Remaining:
+By signing below, I affirm that I understand the requirements outlined on this page.
+
+Compl:
+
+6
+
+0
+
+Computer Science Curriculum Requirements
+
+Course #
+CIST 1400
+CIST 1404*
+CSCI 1620
+CSCI 2240
+CIST 2100
+CIST 2500
+CIST 3110
+* Optional
+Remaining:
+
+Course #
+MATH 1950
+MATH 1960
+CSCI 2030
+MATH 2050
+Remaining:
+
+Notes
+
+Course #
+
+CORE EXTENSION COURSES (21 CREDIT HRS)
+Course Name
+
+Grade
+
+Cr
+
+Notes
+
+IS&T CORE COURSES (18 CREDIT HRS)
+Cr
+
+Grade
+
+Course Name
+Intro to Comp Prgm
+Intro to Comp Prgm Lab
+Intro to Comp Science II
+Intro to C Programming
+Orgs, Apps & Technology
+Intro to Applied Statistics
+IT Ethics
+
+18
+
+Compl:
+
+0
+
+Grade
+
+MATHEMATICS COURSES (16 CREDIT HRS)
+Course Name
+Cr
+Calculus I
+Calculus II
+Math Foundations of CS
+Applied Linear Algebra
+
+16
+
+Compl:
+
+0
+
+Notes
+
+COMPUTER SCIENCE CORE COURSES (27 CREDIT HRS)
+
+Remaining:
+
+21
+
+Compl:
+
+0
+
+Grade
+
+Cr
+
+Notes
+
+BSCS ACADEMIC RULES
+
+1. A minimum of 120 credit hours and a 2.5 GPA are required to graduate from the College 
+of IS&T with a Bachelor's Degree.
+2. All courses must be "C-" or higher.
+3. Students must see an IS&T academic advisor regarding the specific requirements for 
+their major.
+4. Students may follow the UNO catalog requirements in effect at the time of their first 
+enrollment, provided continuous enrollment is maintained (fall, spring, fall, spring....).
+5. Students are accountable for prerequisites of all courses listed.
+6. Thirty of the last 36 hours must be University of Nebraska at Omaha courses. 
+7. Up to 4 semester hours of different physical education activity courses may count toward 
+the degree.                                                                                                                                                         
+8. A repeated course may count only once for graduation. (Exceptions are internships, 
+independent studies, physical education activity courses, and special topic courses, 
+provided each course is a new topic.)
+
+Fall/Spring only
+
+Fall/Spring only
+
+0
+0
+
+Course Name
+Data Structures
+Intro to Digital Design
+Communication Networks
+Theory of Computation
+Programming Languages
+Computer Architecture
+Operating Systems
+Intro to SW Engineering
+ Capstone Project
+Assessment (MFT)
+
+Course #
+CSCI 3320
+CSCI 3710
+CSCI 3550
+CSCI 3660
+CSCI 4220
+CSCI 4350
+CSCI 4500
+CSCI 4830
+CSCI 4970
+CSCI 4000
+Remaining:
+
+Course #
+CSCI 1200*
+CIST 1300*
+CIST 1940*
+
+27
+
+Compl:
+
+ELECTIVE COURSES (7 CREDIT HRS)
+
+Grade
+
+Cr
+
+Course Name
+Comp Science Principles 
+Or Intro to Web Dev
+Or Intro to Functional Pgm
+
+7
+
+Remaining:
+TOTAL CREDITS (Including in-progress classes):
+GPA:
+Last update: March 2016
+Matriculation form corresponds to UNO Catalog 2016-2017.  
+
+Compl:
+
+0
+
+Notes
+* If not
+waived
+Fall only
+
+0
+
+Student
+
+Date
+
+Advisor
+
+Date
+
+
