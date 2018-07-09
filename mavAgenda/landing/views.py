@@ -37,15 +37,20 @@ def login(request):
         #form = LoginForm()
 
 
-
 def selectcourses(request):
     return render(request, 'landing/selectcourses.html')
+
 
 def schedule(request):
     return render(request, 'landing/schedule.html')
 
+
 def createuser(request):
     return render(request, 'landing/createuser.html')
+
+
+
+
 
 
 
