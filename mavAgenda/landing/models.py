@@ -10,8 +10,7 @@ class Course(models.Model):
     A ="All"
     S ="Spring"
     F ="Fall"
-    M ="Summer"
-    
+    M ="Summer"    
     SEM_CHOICE = (
         (A, "All"),
         (S, "Spring"),
@@ -41,16 +40,20 @@ class Course(models.Model):
     class Meta:
         ordering = ['num']
 
+    def display_prereqs(self):
+        return ', '.join([ prereq.num for prereq in self.prereqs.all()[:3] ])
+    
+    display_prereqs.short_description = 'Prereqs'
+
     def __str__(self):
-        return str(self.name)
+        return "%s | %s" % (self.num, self.name)
 
 class Prereq(models.Model):
     prereq = models.ForeignKey('Course', on_delete=models.CASCADE)
-    C = "Corequisite"
-    P = "Prerequisite"   
-    
     this_or = models.ForeignKey('Course', null=True, blank=True, related_name="synonymous", on_delete=models.CASCADE)
 
+    C = "Corequisite"
+    P = "Prerequisite"   
     REQ_CHOICE = (
             (C, "Corequisite"),
             (P, "Prerequisite"),
@@ -61,48 +64,22 @@ class Prereq(models.Model):
     class Meta:
         ordering = ['req_type']
 
+    def display_recursive(self):
+        return "%s -> " % (self.prereq.prereqs)
+
     def __str__(self):
-        return str(self.prereq)
+        return "%s - %s" % (self.prereq, self.req_type)
 
 '''
 Static degree type and associated requirements
 
 '''
 
-class Degree(models.Model):    
-    BS = 'Bachelor of Science'
-    BA = 'Bachelor of Arts'
-    GR = "Master's" 
-    
-    DEGREE_CHOICE = (
-        (BS, 'Bachelor of Science'),
-        (BA, 'Bachelor of Arts'),
-        (GR, "Master's"),
-        )
-    degree = models.CharField(max_length=50,
-                               choices=DEGREE_CHOICE,
-                               default=BS)
-    major = models.CharField(max_length=75)
-    reqtypes = models.ManyToManyField(ReqType)
-
-#    def display_concentration(self):
-#        return ', '.join([ concentration.name for concentration in self.concentration.all()])
-    
-#    display_concentration.short_description = 'Concentration'
-    
-    def __str__(self):
-        return "%s | %s" % (self.degree, self.major)
-
-#class Concentration(models.Model):
-#    degree = models.ForeignKey(Degree, on_delete=models.CASCADE) 
-#    name = models.CharField(max_length=100)
-#    credits = models.IntegerField()
-#    reqs = models.ForeignKey(ReqType, on_delete=models.PROTECT)
-
-class ReqType(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Requirement Fulfilled")
+class Req(models.Model):
+    name = models.CharField(max_length=100)
     credits = models.IntegerField()
-    course = models.ManyToManyField(Course)
+    course = models.ManyToManyField(Course, related_name="required")
+
     GENE = 'General Education Requirements'
     DEPT = 'Department Requirements'
     ELEC = 'Electives'
@@ -119,13 +96,30 @@ class ReqType(models.Model):
     def __str__(self):
         return "%s - %s" % (self.req_type, self.name)
 
+class Degree(models.Model):    
+    BS = 'Bachelor of Science'
+    BA = 'Bachelor of Arts'
+    GR = "Master's" 
+    DEGREE_CHOICE = (
+        (BS, 'Bachelor of Science'),
+        (BA, 'Bachelor of Arts'),
+        (GR, "Master's"),
+        )
+    degree = models.CharField(max_length=50,
+                               choices=DEGREE_CHOICE,
+                               default=BS)
+    major = models.CharField(max_length=75)
+    req = models.ManyToManyField(Req, blank=True, related_name="categories")
+
+    def __str__(self):
+        return "%s | %s" % (self.degree, self.major)
 
 '''
 Dynamic tables for users and associated courses needed/taken 
 
 '''
 class User(models.Model):
-    email = models.CharField(max_length=75, editable=False)
+    email = models.CharField(max_length=75)
     degree = models.ForeignKey(Degree, on_delete=models.PROTECT)
 
     class Meta:
@@ -134,11 +128,12 @@ class User(models.Model):
     def __str__(self):
         return "%s | %s" % (self.degree, self.email)
 
-class UserCompleted(models.Model):
+class Complete(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    coursenumber = models.ForeignKey(Course, on_delete=models.CASCADE)
+    complete = models.ManyToManyField(Course, related_name="taken")
+
     def __str__(self):
-        return self.coursenumber
+        return "%s" % (self.complete.num)
 
 
 
