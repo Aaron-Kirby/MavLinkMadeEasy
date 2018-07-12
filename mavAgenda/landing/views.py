@@ -4,8 +4,7 @@ from django.template import loader
 from django.http import Http404
 from django.urls import reverse
 
-from .models import Course, Degree, ReqType, Prereq
-from .models import User, UserCompleted
+from .models import User, Course, Degree, Req, Prereq, Complete
 
 
 #def selectdegree(request):
