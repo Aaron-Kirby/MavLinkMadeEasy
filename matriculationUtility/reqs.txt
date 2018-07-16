@@ -1,0 +1,73 @@
+ENGLISH COMPOSITION (9 CREDIT HRS)
+ENGL 1150	Composition I
+ENGL 1160	Composition II
+CIST 3000	Adv Comp for IS&T
+---
+MATHEMATICS (3 CREDIT HRS)
+MATH 1310 or test out
+---
+PUBLIC SPEAKING (3 CREDIT HRS)
+CMST 1110	Public Speaking
+CMST 2120,-OR- Debate
+---
+HUMANITIES (9 CREDIT HRS)
+CIST 3110	IT Ethics
+---
+SOCIAL SCIENCE (9 CREDIT HRS)
+CIST 2100	Orgs, Apps & Tech
+---
+GLOBAL DIVERSITY COURSE (3 CREDIT HRS)
+US DIVERSITY COURSE (3 CREDIT HRS)
+IS&T CORE COURSES (18 CREDIT HRS)
+CIST 1400	Intro to Comp Prgm
+CIST 1404*	Intro to Comp Prgm Lab
+CSCI 1620	Intro to Comp Science II
+CSCI 2240	Intro to C Programming
+CIST 2100	Orgs, Apps & Technology
+CIST 2500	Intro to Applied Statistics
+CIST 3110	IT Ethics
+---
+US DIVERSITY COURSE (3 CREDIT HRS)
+IS&T CORE COURSES (18 CREDIT HRS)
+CIST 1400	Intro to Comp Prgm
+CIST 1404*	Intro to Comp Prgm Lab
+CSCI 1620	Intro to Comp Science II
+CSCI 2240	Intro to C Programming
+CIST 2100	Orgs, Apps & Technology
+CIST 2500	Intro to Applied Statistics
+CIST 3110	IT Ethics
+---
+IS&T CORE COURSES (18 CREDIT HRS)
+CIST 1400	Intro to Comp Prgm
+CIST 1404*	Intro to Comp Prgm Lab
+CSCI 1620	Intro to Comp Science II
+CSCI 2240	Intro to C Programming
+CIST 2100	Orgs, Apps & Technology
+CIST 2500	Intro to Applied Statistics
+CIST 3110	IT Ethics
+---
+MATHEMATICS COURSES (16 CREDIT HRS)
+MATH 1950	Calculus I
+MATH 1960	Calculus II
+CSCI 2030	Math Foundations of CS
+MATH 2050	Applied Linear Algebra
+---
+COMPUTER SCIENCE CORE COURSES (27 CREDIT HRS)
+CSCI 3320	Data Structures
+CSCI 3710	Intro to Digital Design
+CSCI 3550	Communication Networks
+CSCI 3660	Theory of Computation
+CSCI 4220	Programming Languages
+CSCI 4350	Computer Architecture
+CSCI 4500	Operating Systems
+CSCI 4830	Intro to SW Engineering
+CSCI 4970	Capstone Project
+CSCI 4000	Assessment (MFT)
+---
+ELECTIVE COURSES (7 CREDIT HRS)
+CSCI 1200*	Comp Science Principles
+CIST 1300*	Or Intro to Web Dev
+CIST 1940*	Or Intro to Functional Pgm
+---
+CORE EXTENSION COURSES (21 CREDIT HRS)
+---

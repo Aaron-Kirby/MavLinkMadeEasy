@@ -1,0 +1,71 @@
+ENGLISH COMPOSITION (9 CREDIT HRS)
+ENGL 1150	Composition I
+ENGL 1160	Composition II
+CIST 3000	Adv Comp for IS&T
+---
+
+MATHEMATICS (3 CREDIT HRS)
+MATH 1310 or test out
+---
+
+PUBLIC SPEAKING (3 CREDIT HRS)
+CMST 1110	Public Speaking
+CMST 2120,-OR- Debate
+---
+
+HUMANITIES (9 CREDIT HRS)
+CIST 3110	IT Ethics
+---
+
+SOCIAL SCIENCE (9 CREDIT HRS)
+CIST 2100	Orgs, Apps & Tech
+ITIN 1010	Activating Innov. in Societ
+---
+
+NATURAL/PHYSICAL SCIENCE (7 CREDIT HRS)
+Include 2 different areas; 1 with a lab
+---
+
+GLOBAL DIVERSITY COURSE (3 CREDIT HRS)
+IASC 1100	Intro to Info Security
+US DIVERSITY COURSE (3 CREDIT HRS)
+---
+,
+IT Innovation Curriculum Requirements
+IS&T CORE COURSES (48 CREDIT HRS)
+ITIN 1010	Activating Innovation in Society
+ITIN 1110	Intro to IT Innovation
+IASC 1100	Intro to Info Security
+CIST 1400	Intro to Comp Prgrm
+CIST 1404*(opt)	Intro to Comp Prgrm Lab
+CSCI 1620	Intro to Comp Science II
+CIST 2100	Orgs, Apps & Technology
+ITIN 2220	Applied IT Innovation
+CSCI 2240	Intro to C Programming
+CIST 2500	Intro to Applied Stats for IT
+ITIN 2990	ITIN Symposium (3 hours)
+CIST 3110	IT Ethics
+ITIN 3330	Product  Dsgn & Development
+ISQA 3310	Managing the DB Env
+ITIN 4440	Agile Development Methods
+ITIN 4980	ITIN Capstone Project Pt I
+ITIN 4990	ITIN Capstone Project Pt II
+---
+
+MATHEMATICS COURSES (6-8 CREDIT HRS)
+MATH 1930	Calc for Mgr/Life/Soc Sci
+MATH 1950,-OR- Calculus I
+MATH 2030	Discrete Math
+---
+
+ELECTIVE COURSES (2-5 CREDIT HRS)
+CSCI 1200*	Comp Science Principles
+CIST 1300*	Or Intro to Web Dev
+CIST 1940*	Or Intro to Functional Pgm
+* If not waived
+---
+
+AREA OF EMPHASIS COURSES (33 CREDIT HRS)
+UPC approval is required prior to enrollment.
+---
+

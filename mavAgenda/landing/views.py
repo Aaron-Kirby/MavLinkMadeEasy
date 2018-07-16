@@ -4,16 +4,8 @@ from django.template import loader
 from django.http import Http404
 from django.urls import reverse
 
-from .models import User
-from .models import UserCompleted
-from .models import PossibleDegrees
-from .models import RequirementCategories
-from .models import Course
-from .models import CoursePrereqs
-from .models import CoreCourse
-from .models import EnglishCourse
-from .models import MathCourse
-from .models import SpeechCourse
+from .models import User, Course, Degree, Req, Prereq, Complete
+
 
 #def selectdegree(request):
     #return render(request, 'landing/selectdegree.html')
