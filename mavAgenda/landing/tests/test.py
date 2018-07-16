@@ -5,15 +5,12 @@ class UITests(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        #runsever
-        super().setUpClass()
         cls.selenium = WebDriver()
         cls.selenium.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
         cls.selenium.quit()
-        super().tearDownClass()
 
     def test_createuser_form(self):
         selenium = self.selenium
