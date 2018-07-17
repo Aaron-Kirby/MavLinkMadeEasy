@@ -18,21 +18,15 @@
 <form class="courseselect" id = "courseselect" action="{% url 'landing:schedule' %}" method="post">
     {% csrf_token %}
 
-    <div class="box">
-        <p class="boxheader">gen eds</p>
-        <p><input type="checkbox">Testing1</p>
-        <p><input type="checkbox">Testing2</p>
-    </div>
-    <div class="box">
-        <p class="boxheader">core classes</p>
-        <p><input type="checkbox">Testing3</p>
-        <p><input type="checkbox">Testing4</p>
-    </div>
-    <div class="box">
-        <p class="boxheader">core extensions</p>
-        <p><input type="checkbox">Testing5</p>
-        <p><input type="checkbox">TestingInfinity</p>
-    </div>
+    <!-- <div class="box"> -->
+        <!-- <p class="boxheader">gen eds</p> -->
+    <!-- </div> -->
+
+    {% if required_courses_list %}
+        {% for course in required_courses_list %}
+            <p>{{ course.name }}</a></p>
+        {% endfor %}
+    {% endif %}
 
     <input name="submit" type="submit" value="submit" class="MAVnextbutton" style="padding: 8px 8px"/>
 
