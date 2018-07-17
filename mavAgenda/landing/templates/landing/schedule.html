@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
 
-<img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+<img src="{% static '/admin/img/mavlinkMadeEasy.JPG' %}" alt="Logo" width="190" height="170"/>
 
 <form action="{% url 'landing:selectcourses' %}" method="post">
     {% csrf_token %}
