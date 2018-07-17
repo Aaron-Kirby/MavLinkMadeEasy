@@ -1,6 +1,6 @@
 @font-face {
             font-family: "Quotus-Bold";
-            src: url("C:/Users/bqacos/DjangoWorkspace/chatbot/Quotus-Bold.ttf");
+            src: url("{% static 'admin/fonts/Quotus-Bold.ttf' %}");
         }
 
         .MAVfont {
