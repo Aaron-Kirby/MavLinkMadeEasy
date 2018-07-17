@@ -10,16 +10,16 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
 
-<img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+<img src="{% static '/admin/img/mavlinkMadeEasy.JPG' %}" alt="Logo" width="190" height="170"/>
 
 <form action="{% url 'landing:selectcourses' %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="update classes taken" class="MAVbutton"  style="padding: 8px 8px"/>
+    <input name="addclasses" type="submit" value="update classes taken" class="MAVbutton"  style="padding: 8px 8px"/>
 </form>
 
 <form action="{% url 'landing:createuser' %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="change major" class="MAVbutton"  style="padding: 8px 8px"/>
+    <input name="changemajor" type="submit" value="change major" class="MAVbutton"  style="padding: 8px 8px"/>
 </form>
 <!-- check to see that the user was found in the database -->
 <!-- generate schedule based on db tables -->
