@@ -19,21 +19,20 @@
     enter email
     </br>
     </br>
-    <input type="text" name="email" class="MAVselect"/>
-
+    <input type="text" name="emailbox" class="MAVselect"/>
 
     <div class="select" id="selectMajor">
         <h3 style="font-size: 24pt; margin-bottom: -28px;">select degree</h3>
         </br>
         <p>
-        <select class="MAVselect">
+        <select name ="degreedd" class="MAVselect">
             <option selected disabled hidden>select degree</option>
             <option value="bachelor's of science">bachelor's of science</option>
             <option value="master's of science">master's of science</option>
             <option value="doctorate of science">doctrate of science</option>
         </select>
         in
-        <select class="MAVselect">
+        <select name="majordd" class="MAVselect">
             <option selected disabled hidden>select major</option>
             <option value="computer science">computer science</option>
             <option value="other">more majors coming soon!</option>
@@ -41,6 +40,7 @@
         </p>
         </br>
         </br>
+        <p><input type="checkbox" name="agree"/>I agree</p>
         <input name="submit" type="submit" value="submit" class="MAVbutton" style="padding: 8px 8px"/>
     </div>
 </form>
