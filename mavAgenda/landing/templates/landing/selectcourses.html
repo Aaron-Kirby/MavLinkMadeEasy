@@ -15,13 +15,14 @@
 <h3 align="center">select courses completed</h3>
 <p>place a check mark next to the classes you've completed</p>
 
-<form class="courseselect" id = "courseselect" action="{% url 'landing:schedule' %}" method="post">
-    {% csrf_token %}
+<!--<form class="courseselect" id = "courseselect" action="{% url 'landing:schedule' %}" method="post">
+    {% csrf_token %} -->
 
     <!-- <div class="box"> -->
         <!-- <p class="boxheader">gen eds</p> -->
     <!-- </div> -->
 
+<!--
     {% if required_courses_list %}
         {% for course in required_courses_list %}
             <p>{{ course.name }}</a></p>
@@ -31,6 +32,30 @@
     <input name="submit" type="submit" value="submit" class="MAVnextbutton" style="padding: 8px 8px"/>
 
 </form>
+-->
+
+{% block content %}
+<h1> Select the class's you've taken </h1>
+<form method="POST" class="usercompleted-form">{% csrf_token %}
+    <p>user:
+    {{form.user}}
+    </p>
+
+    <p>completed
+    {{form.complete}}
+    </p>
+	<!--<h2>General Education Classes:</h2>
+	{{form.general_classtaken}}
+	<h3>Core Classes:</h3>
+	{{form.core_classtaken}}
+	<h4>Core Extension Classes:</h4>
+	{{form.core_extension_classtaken}}
+	<h5>Foreign Key</h5>
+	{{form.user}}
+	-->
+	<button type="submit" class="save btn btn-default">Submit</button>
+</form>
+{% endblock%}
 
 </body>
 </html>
