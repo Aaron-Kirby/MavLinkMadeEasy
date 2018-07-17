@@ -129,8 +129,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/home/pyParty/MavLinkMadeEasy/mavAgenda/static/admin/',
     '/home/pyParty/MavLinkMadeEasy/mavAgenda/static/landing/',
-    '/MavLinkMadeEasy/mavAgenda/static/admin/',
     '/MavLinkMadeEasy/mavAgenda/static/landing/',
 ]
