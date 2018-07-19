@@ -11,15 +11,18 @@ class Course(models.Model):
     S ="Spring"
     F ="Fall"
     M ="Summer"    
+    
     SEM_CHOICE = (
         (A, "All"),
         (S, "Spring"),
         (F, "Fall"),
         (M, "Summer"),
         )
+    
     semester = models.CharField(max_length=15,
                                 choices=SEM_CHOICE,
                                 default=A)          
+
     credits = models.IntegerField()
     prereqs = models.ManyToManyField('Prereq', related_name="needed", blank=True)
 
@@ -32,13 +35,16 @@ class Course(models.Model):
         (Y, "Lab"),
         (W, "Waiver"),
         )
+    
     special = models.CharField(max_length=15,
                            choices=SPECIAL_TYPE_CHOICE,
                            default=N)
+    
     comment = models.CharField(max_length=200, blank=True)
-
+    
     class Meta:
-        ordering = ['num']
+        ordering=['num']
+    
 
     def display_prereqs(self):
         return ', '.join([ prereq.num for prereq in self.prereqs.all() ])
@@ -60,15 +66,15 @@ class Prereq(models.Model):
 
     C = "Corequisite"
     P = "Prerequisite"   
+
     REQ_CHOICE = (
             (C, "Corequisite"),
             (P, "Prerequisite"),
             )
+    
     req_type = models.CharField(max_length=20,
                                 choices=REQ_CHOICE,
                                 null=True)
-    class Meta:
-        ordering = ['req_type']
 
     def display_recursive(self):
         return "%s -> " % (self.prereq.prereqs)
@@ -110,16 +116,20 @@ class Degree(models.Model):
     BS = 'Bachelor of Science'
     BA = 'Bachelor of Arts'
     GR = "Master's" 
+    
     DEGREE_CHOICE = (
         (BS, 'Bachelor of Science'),
         (BA, 'Bachelor of Arts'),
         (GR, "Master's"),
         )
+    
     degree = models.CharField(max_length=50,
                                choices=DEGREE_CHOICE,
                                default=BS)
+    
     major = models.CharField(max_length=75)
-    req = models.ManyToManyField(Req, blank=True, related_name="categories")
+    
+    req = models.ManyToManyField(Req, related_name="categories")
     
     def display_course_reqs(self):
         return ', '.join([ req.name for req in self.req.all() ])
@@ -133,12 +143,10 @@ class Degree(models.Model):
 Dynamic tables for users and associated courses needed/taken 
 
 '''
+
 class User(models.Model):
     email = models.CharField(max_length=75)
     degree = models.ForeignKey(Degree, on_delete=models.PROTECT)
-
-    class Meta:
-        ordering = ['email']
 
     def display_degree(self):
         return "%s" % (self.degree)
@@ -151,7 +159,7 @@ class Complete(models.Model):
     complete = models.ManyToManyField(Course, related_name="taken")
     
     def display_degree(self):
-        return "%s\t%s" % (self.user.degree.major, self.user.degree.degree)
+        return "%s - %s" % (self.user.degree.major, self.user.degree.degree)
 
     def display_courses_completed(self):
         return ', '.join([ complete.name for complete in self.complete.all()])
