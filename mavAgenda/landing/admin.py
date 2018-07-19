@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from .models import Course, Degree, Req, Prereq, User, Complete
 
 # Register models below
@@ -10,20 +11,22 @@ from .models import Course, Degree, Req, Prereq, User, Complete
 # admin.site.register(Prereq)
 # admin.site.register(Req)
 
-
-class DegreeAdmin(admin.ModelAdmin):
-    list_display = ('degree', 'major')
-    list_filter = ('degree', 'major')
-    fields = ['degree', 'major']
-    filter_horizontal = ['req']
-
-admin.site.register(Degree, DegreeAdmin)
+admin.site.site_header = 'Mavlink - Made Easy'
+admin.site.site_title = "pyParty Admin"
 
 class ReqAdmin(admin.ModelAdmin):
     list_display = ('name', 'credits', 'req_type', 'display_degrees')
     list_filter = ('req_type', 'name')
 
 admin.site.register(Req, ReqAdmin)
+
+class DegreeAdmin(admin.ModelAdmin):
+    list_display = ('degree', 'major')
+    list_filter = ('degree', 'req')
+    filter_horizontal = ['req']
+    fields = [('degree', 'major'), 'req']
+
+admin.site.register(Degree, DegreeAdmin)
 
 class PrereqAdmin(admin.ModelAdmin):
     list_display = ('prereq', 'this_or','req_type')
@@ -46,7 +49,7 @@ class CourseAdmin(admin.ModelAdmin):
 admin.site.register(Course, CourseAdmin)
 
 class CompleteAdmin(admin.ModelAdmin):
-    list_display = ('user', 'display_courses_completed', 'display_degree', 'display_credits_earned')
+    list_display = ('user', 'display_courses_completed', 'display_degree', 'display_credits_earned', 'display_credits_needed')
     filter_horizontal = ['complete']   
 #list_filter = ['display_degree'] 
 
