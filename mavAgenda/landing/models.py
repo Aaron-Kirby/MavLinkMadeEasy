@@ -5,7 +5,7 @@ from django.db import models
 
 class Course(models.Model):
     name = models.CharField(max_length=75)
-    num = models.CharField(max_length=75)
+    num = models.CharField(max_length=75, unique=True)
 
     A ="All"
     S ="Spring"
