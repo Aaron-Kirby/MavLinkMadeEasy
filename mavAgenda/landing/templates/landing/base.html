@@ -1,7 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 {% load staticfiles %}
 <head>
-<title> Mavlink - Made Easy </title>
-<link rel="stylesheet" href="{% static 'landing/css/style.css' %}">  
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:300,400,400i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'landing/css/style.css' %}" />
+    <title>MavLINK Made Easy - Landing Page</title>
 </head>
 <body>
+<a href="{% url 'landing:login' %}"><img src="{% static 'landing/img/MMElogo.JPG' %}" alt="Logo" width="190" height="170" class="center"/></a>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

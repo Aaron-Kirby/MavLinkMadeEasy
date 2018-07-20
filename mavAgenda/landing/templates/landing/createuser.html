@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MavLINK Made Easy - Landing Page</title>
-</head>
-<body class="MAVfont">
-
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'landing/css/style.css' %}" />
-
-<img src="{% static "landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+{% extends 'landing/base.html' %}
+{% block content %}
 
 <form class="email" id = "email" action="{% url 'landing:selectcourses' %}" method="post">
 
@@ -45,5 +34,4 @@
     </div>
 </form>
 
-</body>
-</html>
+{% endblock %}

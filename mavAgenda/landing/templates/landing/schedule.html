@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body class="MAVfont">
+{% extends 'landing/base.html' %}
 
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
-
-<img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+{% block content %}
 
 <form action="{% url 'landing:selectcourses' %}" method="post">
     {% csrf_token %}
@@ -49,8 +39,4 @@
     <p>(list all your classes here!</p>
 </div>
 
-
-
-
-</body>
-</html>
+{% endblock %}

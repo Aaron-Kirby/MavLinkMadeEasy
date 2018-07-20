@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MavLINK Made Easy - Select Courses Completed</title>
-</head>
-<body class="MAVfont">
-
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
-
-<img src="{% static "landing/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+{% extends 'landing/base.html' %}
+{% block content %}
 
 <h3 align="center">select courses completed</h3>
 <p>place a check mark next to the classes you've completed</p>
@@ -38,5 +27,4 @@
 
 </form>
 
-</body>
-</html>
+{% endblock %}
