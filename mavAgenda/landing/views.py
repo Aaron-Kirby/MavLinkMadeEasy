@@ -15,6 +15,10 @@ def selectcourses(request, pk):
         form = UserCompletedForm(request.POST)
         #assign pk number
         if form.is_valid():
+
+            # we want to delete everything from the UserCompleted table with the pk provided
+            # then update to add the classes selected
+
             courses = form.save(commit=False)
             courses.save()
             return HttpResponseRedirect(reverse('landing:schedule'))
@@ -31,7 +35,6 @@ def getDegree(d, m):
         if deg.major == m and deg.degree == d:
             return deg
 
-# new createuser
 def createuser(request):
     if request.method == "POST":
         emailForm = EmailForm(request.POST, prefix = "e")
@@ -43,8 +46,9 @@ def createuser(request):
             u = User(email = eF.email, degree=deg)
             u.save()
             userID = u.id
-            return HttpResponse(reverse('landing/selectcourses.html', userID))
-
+            #request.session['currentUser'] = u
+            return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+            #return render(request, 'landing/selectcourses.html')
     else:
         emailForm = EmailForm(prefix="e")
         degreeForm = DegreeForm(prefix="d")
