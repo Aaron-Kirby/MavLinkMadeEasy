@@ -1,11 +1,22 @@
 from django import forms
+from betterforms.multiform import MultiModelForm
 from .models import *
 
-class UserForm(forms.ModelForm):
+class EmailForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'degree')
+        fields = ('email',)
 
+class DegreeForm(forms.ModelForm):
+    class Meta:
+        model = Degree
+        fields = ('degree', 'major',)
+
+class UserForm(MultiModelForm):
+    form_classes = {
+        'email': EmailForm,
+        'degree': DegreeForm,
+    }
 
 class UserCompletedForm(forms.ModelForm):
     class Meta:

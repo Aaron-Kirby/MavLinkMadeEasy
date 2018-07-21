@@ -13,6 +13,7 @@ def login(request):
 def selectcourses(request):
     if request.method == "POST":
         form = UserCompletedForm(request.POST)
+        #assign pk number
         if form.is_valid():
             courses = form.save(commit=False)
             courses.save()
@@ -27,7 +28,9 @@ def schedule(request):
 def createuser(request):
     if request.method == "POST":
         form = UserForm(request.POST)
+        print( "got form we think..." )
         if form.is_valid():
+            print( "Invalid form" )
             user = form.save(commit=False)
             user.save()
             #return render(request, 'landing/selectcourses.html', {'form': form})
