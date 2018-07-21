@@ -10,7 +10,7 @@ from .forms import *
 def login(request):
     return render(request, 'landing/login.html')
 
-def selectcourses(request):
+def selectcourses(request, pk):
     if request.method == "POST":
         form = UserCompletedForm(request.POST)
         #assign pk number
@@ -28,14 +28,20 @@ def schedule(request):
 def createuser(request):
     if request.method == "POST":
         form = UserForm(request.POST)
-        print( "got form we think..." )
         if form.is_valid():
-            print( "Invalid form" )
-            user = form.save(commit=False)
-            user.save()
+            degreeID = getDegreeID(form.degreeForm.degree, form.degreeForm.major)
+            u = User( email = form.emailForm.email, degree=degreeID)
+            u.save(commit=False)
+            u.save()
+            args = {'PK':u.id}
             #return render(request, 'landing/selectcourses.html', {'form': form})
-            return HttpResponseRedirect(reverse('landing:selectcourses'))
+            return HttpResponseRedirect(reverse('landing:selectcourses/'), args)
     else:
         form = UserForm()
     return render(request, 'landing/createuser.html', {'form': form})
+
+def getDegreeID(d, m):
+    for d in Degree:
+        if d.major == m and d.degree == d:
+            return d.id
 

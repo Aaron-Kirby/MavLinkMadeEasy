@@ -12,46 +12,9 @@
 
 <img src="{% static "landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
 
-<!--
-<form class="email" id = "email" action="{% url 'landing:selectcourses' %}" method="post">
-
-    {% csrf_token %}
-
-    enter email
-    </br>
-    </br>
-    <input type="text" name="emailbox" class="MAVselect"/>
-
-    <div class="select" id="selectMajor">
-        <h3 style="font-size: 24pt; margin-bottom: -28px;">select degree</h3>
-        </br>
-        <p>
-        <select name ="degreedd" class="MAVselect">
-            <option selected disabled hidden>select degree</option>
-            <option value="bachelor's of science">bachelor's of science</option>
-            <option value="master's of science">master's of science</option>
-            <option value="doctorate of science">doctrate of science</option>
-        </select>
-        in
-        <select name="majordd" class="MAVselect">
-            <option selected disabled hidden>select major</option>
-            <option value="computer science">computer science</option>
-            <option value="other">more majors coming soon!</option>
-        </select>
-        </p>
-        </br>
-        </br>
-        <p><input type="checkbox" name="agree"/>I agree</p>
-        <input name="submit" type="submit" value="submit" class="MAVbutton" style="padding: 8px 8px"/>
-    </div>
-</form>
-
--->
-
-
 {% block content %}
 <h1> Enter Required Information </h1>
-<form method="POST" class="user-form" action="{% url 'landing:selectcourses' %}" class="email" id = "email">
+<form method="POST" class="user-form" class="email" id = "email">
 
     {% csrf_token %}
 
