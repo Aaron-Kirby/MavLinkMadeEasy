@@ -11,14 +11,15 @@
 <img src="{% static 'landing/img/MMElogo.JPG' %}" alt="Logo" width="190" height="170"/>
 
 
-<form class="email" id = "email" action="{% url 'landing:schedule' %}" method="post">
+<form class="email" id = "email" method="post">
     {% csrf_token %}
 
     enter email
     </br>
     </br>
-    <input type="text" name="email"/>
+    <p name="emailbox" >{{emailForm.email}}</p>
     <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
+
 </form>
 
 </br>

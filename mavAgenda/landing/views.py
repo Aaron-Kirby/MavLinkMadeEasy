@@ -7,13 +7,35 @@ from django.urls import reverse
 from .models import *
 from .forms import *
 
+def getUserByEmail(e):
+    userTable = User.objects.all()
+    for cu in userTable:
+        if cu.email == e:
+            return cu
+
+def getDegree(d, m):
+    degreeTable = Degree.objects.all()
+    for deg in degreeTable:
+        if deg.major == m and deg.degree == d:
+            return deg
+
+#########################################
+
 def login(request):
-    return render(request, 'landing/login.html')
+    if request.method == "POST":
+        emailForm = EmailForm(request.POST, prefix = "e")
+        if emailForm.is_valid():
+            eF = emailForm.save(commit=False)
+            u = getUserByEmail(eF.email)
+            userID = u.id
+            return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+    else:
+        emailForm = EmailForm(prefix="e")
+    return render(request, 'landing/login.html', {'emailForm': emailForm, })
 
 def selectcourses(request, pk):
     if request.method == "POST":
         form = UserCompletedForm(request.POST)
-        #assign pk number
         if form.is_valid():
 
             # we want to delete everything from the UserCompleted table with the pk provided
@@ -29,12 +51,6 @@ def selectcourses(request, pk):
 def schedule(request):
     return render(request, 'landing/schedule.html')
 
-def getDegree(d, m):
-    degreeTable = Degree.objects.all()
-    for deg in degreeTable:
-        if deg.major == m and deg.degree == d:
-            return deg
-
 def createuser(request):
     if request.method == "POST":
         emailForm = EmailForm(request.POST, prefix = "e")
@@ -46,13 +62,8 @@ def createuser(request):
             u = User(email = eF.email, degree=deg)
             u.save()
             userID = u.id
-            #request.session['currentUser'] = u
             return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
-            #return render(request, 'landing/selectcourses.html')
     else:
         emailForm = EmailForm(prefix="e")
         degreeForm = DegreeForm(prefix="d")
     return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm})
-
-
-
