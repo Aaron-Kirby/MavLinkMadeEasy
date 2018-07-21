@@ -12,12 +12,6 @@ class DegreeForm(forms.ModelForm):
         model = Degree
         fields = ('degree', 'major',)
 
-class UserForm(MultiModelForm):
-    form_classes = {
-        'email': EmailForm,
-        'degree': DegreeForm,
-    }
-
 class UserCompletedForm(forms.ModelForm):
     class Meta:
         model = Complete

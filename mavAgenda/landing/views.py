@@ -25,23 +25,29 @@ def selectcourses(request, pk):
 def schedule(request):
     return render(request, 'landing/schedule.html')
 
+def getDegree(d, m):
+    degreeTable = Degree.objects.all()
+    for deg in degreeTable:
+        if deg.major == m and deg.degree == d:
+            return deg
+
 def createuser(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            degreeID = getDegreeID(form.degreeForm.degree, form.degreeForm.major)
-            u = User( email = form.emailForm.email, degree=degreeID)
-            u.save(commit=False)
+        emailForm = EmailForm(request.POST, prefix = "e")
+        degreeForm = DegreeForm( request.POST, prefix = "d")
+        if emailForm.is_valid() and degreeForm.is_valid():
+            dF = degreeForm.save(commit=False)
+            eF = emailForm.save(commit=False)
+            deg = getDegree(dF.degree, dF.major)
+            u = User(email = eF.email, degree=deg)
             u.save()
-            args = {'PK':u.id}
-            #return render(request, 'landing/selectcourses.html', {'form': form})
-            return HttpResponseRedirect(reverse('landing:selectcourses/'), args)
-    else:
-        form = UserForm()
-    return render(request, 'landing/createuser.html', {'form': form})
+            userID = u.id
+            return HttpResponse(reverse('landing/selectcourses.html', userID))
 
-def getDegreeID(d, m):
-    for d in Degree:
-        if d.major == m and d.degree == d:
-            return d.id
+    else:
+        emailForm = EmailForm(prefix="e")
+        degreeForm = DegreeForm(prefix="d")
+    return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm})
+
+
 

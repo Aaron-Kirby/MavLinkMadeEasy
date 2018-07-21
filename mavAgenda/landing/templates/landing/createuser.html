@@ -14,18 +14,18 @@
 
 {% block content %}
 <h1> Enter Required Information </h1>
-<form method="POST" class="user-form" class="email" id = "email">
+<form method="POST" class="email" id = "email">
 
     {% csrf_token %}
 
     <h3>email:</h3>
-	<p name="emailbox">{{form.email}}</p>
+	<p name="emailbox" >{{emailForm.email}}</p>
 
     <h3>degree track:</h3>
-    <p name ="degreedd" class="MAVselect">{{form.degree.degree}}</p>
+    <p name ="degreedd" class="MAVselect">{{degreeForm.degree}}</p>
 
 	<h3>major:</h3>
-	<p name ="majordd" class="MAVselect">{{form.degree.major}}</p>
+	<p name ="majordd" class="MAVselect">{{degreeForm.major}}</p>
 
 	<button type="submit" name="submit" value="submit" class="MAVbutton" style="padding: 8px 8px">submit</button>
 
