@@ -12,6 +12,8 @@ class DegreeForm(forms.ModelForm):
         model = Degree
         fields = ('degree', 'major',)
 
+# got rid of UserForm craziness here
+
 class UserCompletedForm(forms.ModelForm):
     class Meta:
         model = Complete

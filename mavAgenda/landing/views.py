@@ -31,6 +31,7 @@ def getDegree(d, m):
         if deg.major == m and deg.degree == d:
             return deg
 
+# new createuser
 def createuser(request):
     if request.method == "POST":
         emailForm = EmailForm(request.POST, prefix = "e")
