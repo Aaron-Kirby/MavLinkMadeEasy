@@ -1,10 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.http import Http404
 from django.urls import reverse
 
-from .models import *
 from .forms import *
 
 def getUserByEmail(e):
@@ -18,6 +15,22 @@ def getDegree(d, m):
     for deg in degreeTable:
         if deg.major == m and deg.degree == d:
             return deg
+
+def getCompletedByUser(uID):
+    cu = User.objects.get(pk=uID)
+    completedCourses = []
+    completedTable = Complete.objects.all()
+    for c in completedTable:
+        if c.user == cu:
+            completedCourses.append(c)
+    return completedCourses
+
+def getCoursesForUser(uID):
+    cu = User.objects.get(pk=uID)
+    requiredCourses = []
+    for cc in cu.degree.req.all():
+        requiredCourses.append(cc)
+    return requiredCourses
 
 #########################################
 
