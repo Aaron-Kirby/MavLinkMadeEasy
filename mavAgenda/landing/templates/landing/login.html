@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load staticfiles %}
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static "landing/css/style.css" %}" />
     <title>MavLINK Made Easy - Landing Page</title>
 </head>
 
 <body>
-<img src="{% static "/landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
 
-<form class="email" id = "email" action="{% url 'landing:schedule' %}" method="post">
+{% extends 'landing/base.html' %}
+{% block content %}
+
+<form class="email" id = "email" method="post">
+
     {% csrf_token %}
 
+    </br>
+
     enter email
-    </br>
-    </br>
-    <input type="text" name="email"/>
-    <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
+    <p name="emailbox" >
+        {{emailForm.email}}
+        <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
+    </p>
+
 </form>
 
 </br>
 </br>
 
 <form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="post">
+
     {% csrf_token %}
 
     <p align="center">not a user?
     <input type="submit" value="sign up!" class="MAVbutton"  style="padding: 8px 8px"/>
     </p>
+
 </form>
+
+{% endblock %}
 
 </body>
 </html>

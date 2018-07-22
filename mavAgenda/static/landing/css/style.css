@@ -1,14 +1,19 @@
 @font-face {
-            font-family: "Quotus-Bold";
-            src: url("home/pyParty/MavLinkMadeEasy/mavAgenda/static/landing/fonts/Quotus-Bold.ttf");
+            font-family: 'Josefin Slab', serif;
+            src: url("C:/Users/bqacos/DjangoWorkspace/chatbot/Quotus-Bold.ttf");
         }
 
+img.center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .MAVfont {
             font-family: Arial;
         }
 
         .select {
-            font-family:Quotus-Bold;
+            font-family: 'Josefin Slab', serif;
             text-align:center;
         }
 

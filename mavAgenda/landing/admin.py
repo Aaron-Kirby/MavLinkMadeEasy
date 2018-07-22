@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Course, Degree, Req, Prereq, User, Complete
+from .models import *
 
 # Register models below
 
 admin.site.register(User)
 admin.site.register(Complete)
 admin.site.register(Course)
-# admin.site.register(Degree)
+#admin.site.register(Degree)
 admin.site.register(Prereq)
 admin.site.register(Req)
 

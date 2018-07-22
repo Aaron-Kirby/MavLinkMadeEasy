@@ -1,49 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>MavLINK Made Easy - Landing Page</title>
 </head>
-<body class="MAVfont">
+<body>
 
-{% load static %}
+{% extends 'landing/base.html' %}
+{% block content %}
 
-<link rel="stylesheet" type="text/css" href="{% static "landing/css/style.css" %}" />
-
-<img src="{% static "/landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
-
-<form class="email" id = "email" action="{% url 'landing:selectcourses' %}" method="post">
+<form method="POST" class="email" id = "email">
 
     {% csrf_token %}
-
-    enter email
-    </br>
-    </br>
-    <input type="text" name="emailbox" class="MAVselect"/>
-
     <div class="select" id="selectMajor">
-        <h3 style="font-size: 24pt; margin-bottom: -28px;">select degree</h3>
-        </br>
-        <p>
-        <select name ="degreedd" class="MAVselect">
-            <option selected disabled hidden>select degree</option>
-            <option value="bachelor's of science">bachelor's of science</option>
-            <option value="master's of science">master's of science</option>
-            <option value="doctorate of science">doctrate of science</option>
-        </select>
-        in
-        <select name="majordd" class="MAVselect">
-            <option selected disabled hidden>select major</option>
-            <option value="computer science">computer science</option>
-            <option value="other">more majors coming soon!</option>
-        </select>
-        </p>
-        </br>
-        </br>
-        <p><input type="checkbox" name="agree"/>I agree</p>
-        <input name="submit" type="submit" value="submit" class="MAVbutton" style="padding: 8px 8px"/>
+
+        <p name="emailbox" class="MAVselect">email:{{emailForm.email}}</p>
+
+        <p name ="degreedd" class="MAVselect">select degree:{{degreeForm.degree}}</p>
+
+	    <p name ="majordd" class="MAVselect">select major: {{degreeForm.major}}</p>
+
+    	<button type="submit" name="submit" value="submit" class="MAVbutton" style="padding: 8px 8px">submit</button>
+
     </div>
+
 </form>
+{% endblock%}
+
+</br>
+</br>
+
+
+
+
+
 
 </body>
 </html>

@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>MavLINK Made Easy - Select Courses Completed</title>
 </head>
-<body class="MAVfont">
+<body>
 
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'landing/style.css' %}" />
-
-<img src="{% static "/landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+{% extends 'landing/base.html' %}
+{% block content %}
 
 <h3 align="center">select courses completed</h3>
 <p>place a check mark next to the classes you've completed</p>
 
-<form class="courseselect" id = "courseselect" action="{% url 'landing:schedule' %}" method="post">
+<h1> Select the classes you've taken </h1>
+<form method="POST" class="usercompleted-form">
+
     {% csrf_token %}
 
-    <!--<div class="box">
-        <p class="boxheader">gen eds</p>
-    </div>
-    -->
+    <p>completed
+    {{form.complete}}
+    </p>
 
-    {% if required_courses_list %}
-        {% for course in required_courses_list %}
-            <p>{{ course.name }}</a></p>
-        {% endfor %}
-    {% endif %}
-
-    <input name="submit" type="submit" value="submit" class="MAVnextbutton" style="padding: 8px 8px"/>
-
+	<button type="submit" class="MAVnextbutton" style="padding: 8px 8px">Submit</button>
 </form>
+{% endblock%}
 
 </body>
 </html>
