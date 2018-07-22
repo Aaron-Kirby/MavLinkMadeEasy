@@ -1,25 +1,20 @@
 {% extends 'landing/base.html' %}
-
 {% block content %}
-
-<form class="email" id = "email" action="{% url 'landing:schedule' %}" method="post">
+<br>
+<div class="container" id="register">
+<form class="email" id="email" action="{% url 'landing:schedule' %}" method="post">
     {% csrf_token %}
-
-    enter email
-    </br>
-    </br>
-    <input type="text" name="email"/>
-    <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
+    <h3>Login</h3>
+    <input type="text" name="email" class="MAVselect" style="width:90%;"/>     
+    <input type="submit" value="login" class="MAVbutton"/>
 </form>
+<br>
+<br>
+<h3>Register</h3>
 
-</br>
-</br>
-
-<form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="post">
-    {% csrf_token %}
-
-    <p align="center">not a user?
-    <input type="submit" value="sign up!" class="MAVbutton"  style="padding: 8px 8px"/>
-    </p>
+<form class="select" id="joinnow" action="{% url 'landing:createuser' %}" method="post">
+{% csrf_token %}<input type="submit" value="sign up!" class="MAVbutton"/>
 </form>
+</div>
+<br>
 {% endblock %}

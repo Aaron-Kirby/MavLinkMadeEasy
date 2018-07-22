@@ -1,42 +1,76 @@
 {% extends 'landing/base.html' %}
-
 {% block content %}
+<!-- check to see that the user was found in the database -->
+<!-- generate schedule based on db tables -->
 
+<br>
+<h3>Schedule Generated</h3>
+<br>
+<p class="boxheader">2018-2019</p>
+<hr>
+<div class="row" style="border: none;">
+    <div class="innerBox">
+        <p class="boxheader">Fall</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox">
+        <p class="boxheader">Spring</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox">
+        <p class="boxheader">Summer</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox" id="metrics">
+        <p class="boxheader" style="text-align: left;">Metrics</p>
+        <p>reqs met: x/y<p>
+        <p>prereqs fulfilled: z</p>
+        <p>total credits: a</p>
+    </div>
+</div>
+<p class="boxheader">2019-2020</p>
+<hr>
+<div class="row" style="border: none;">
+    <div class="innerBox">
+        <p class="boxheader">Fall</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox">
+        <p class="boxheader">Spring</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox">
+        <p class="boxheader">Summer</p>
+        <p>(list a class here!)</p>
+        <p>(list another class here!)</p>
+        <p>(list yet another class here!)</p>
+    </div>
+    <div class="innerBox" id="metrics">
+        <p class="boxheader" style="text-align: left;">Metrics</p>
+        <p>reqs met: x/y<p>
+        <p>prereqs fulfilled: z</p>
+        <p>total credits: a</p>
+    </div>
+</div>
+<br>
 <form action="{% url 'landing:selectcourses' %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="update classes taken" class="MAVbutton"  style="padding: 8px 8px"/>
+    <input type="submit" value="update classes taken" class="MAVbutton">
 </form>
 
 <form action="{% url 'landing:createuser' %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="change major" class="MAVbutton"  style="padding: 8px 8px"/>
+    <input type="submit" value="change major" class="MAVbutton">
 </form>
-<!-- check to see that the user was found in the database -->
-<!-- generate schedule based on db tables -->
-
-
-<h3 align="center">your schedule</h3>
-
-<div class="box">
-    <p class="boxheader">fall 2018</p>
-    <ul>(list a class here!)</ul>
-    <ul>(list another class here!)</ul>
-    <ul>(list yet another class here!)</ul>
-</div>
-
-<div class="box">
-    <p class="boxheader">spring 2019</p>
-    <p>(list all your classes here!</p>
-</div>
-
-<div class="box">
-    <p class="boxheader">fall 2019</p>
-    <p>(list all your classes here!</p>
-</div>
-
-<div class="box">
-    <p class="boxheader">spring 2010</p>
-    <p>(list all your classes here!</p>
-</div>
-
+<br>
 {% endblock %}

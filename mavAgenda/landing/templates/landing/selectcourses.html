@@ -1,30 +1,75 @@
 {% extends 'landing/base.html' %}
 {% block content %}
-
-<h3 align="center">select courses completed</h3>
-<p>place a check mark next to the classes you've completed</p>
-
-<form class="courseselect" id = "courseselect" action="{% url 'landing:schedule' %}" method="post">
+<br>
+<h3>Select Courses Completed</h3>
+<div class="innerBox" style="border: none; width:100%;"> 
+<p>place a check mark next to the classes you've already taken</p>
+</div>
+<form class="courseselect" id="courseselect" action="{% url 'landing:schedule' %}" method="post">
     {% csrf_token %}
 
-    <div class="box">
-        <p class="boxheader">gen eds</p>
-        <p><input type="checkbox">Testing1</p>
-        <p><input type="checkbox">Testing2</p>
+    <div class="box" style="border: none;">
+        <p class="boxheader">General Education Requirements</p>
+        <div class="row"> 
+            <p class="boxheader">Mathematics</p>
+            <p><input type="checkbox">MATH XYXY</p>
+            <p><input type="checkbox">MATH XYXY</p>  
+            <p><input type="checkbox">MATH ZZYY</p>
+            <p style="font-style: italic; font-weight: 300;">prereq | MATH XXZY</p>
+        </div>
+        <div class="row"> 
+            <p class="boxheader">English</p>
+            <p><input type="checkbox">ENGL XYXY</p>
+            <p><input type="checkbox">ENGL XYXY</p>  
+            <p><input type="checkbox">ENGL ZZYY</p>
+        </div>
+        <div class="row"> 
+            <p class="boxheader">Humanities</p>
+            <p><input type="checkbox">HUMN XYXY</p>
+            <p style="font-style: italic; font-weight: 300;">prereq | HUMN XXZY</p>
+            <p><input type="checkbox">HUMN XYXY</p>  
+            <p><input type="checkbox">HUMN ZZYY</p>
+            <p style="display: inline-block; float:right;">45</p>
+        </div>
     </div>
-    <div class="box">
-        <p class="boxheader">core classes</p>
-        <p><input type="checkbox">Testing3</p>
-        <p><input type="checkbox">Testing4</p>
-    </div>
-    <div class="box">
-        <p class="boxheader">core extensions</p>
-        <p><input type="checkbox">Testing5</p>
-        <p><input type="checkbox">TestingInfinity</p>
+    <div class="box" style="border: none;">
+        <p class="boxheader">Department Requirementss</p>
+        
+        <div class="row" style="left: 100px;"> 
+            <p class="boxheader">Program Core</p>
+            <p><input type="checkbox">MATH XYXY</p>
+            <p><input type="checkbox">MATH XYXY</p>  
+            <p><input type="checkbox">MATH ZZYY</p>
+            <p style="font-style: italic; font-size: 9pt;font-weight: 300;">prereq | MATH XXZY</p>
+        </div>
+        <div class="row"> 
+            <p class="boxheader">College of IS&T Requirements</p>
+            <p><input type="checkbox">ENGL XYXY</p>
+            <p><input type="checkbox">MATH XYXY</p>  
+            <p><input type="checkbox">CSCI ZZYY</p>
+        </div>
+        <div class="row"> 
+            <p class="boxheader">Upper-level Courses</p>
+            <p><input type="checkbox">CSCN XYXY</p>
+            <p><input type="checkbox">CIST XYXY</p>  
+            <p><input type="checkbox">CSCI ZZYY</p>
+        </div>
     </div>
 
-    <input type="submit" value="submit" class="MAVnextbutton" style="padding: 8px 8px"/>
+    <div class="box" style="border: none;">
+        <p class="boxheader">Electives</p>
+        
+        <div class="row"> 
+            <p class="boxheader">Elective Courses</p>
+            <p><input type="checkbox">CSCI YYXX</p>
+            <p><input type="checkbox">CIST XYXY</p>  
+            <p><input type="checkbox">MATH ZZYY</p>
+            <p style="font-style: italic; font-weight: 300;">prereq | MATH XXZY</p>
+        </div>
+    </div>
+<br>
+        <input type="submit" value="submit" class="MAVbutton"/>
 
 </form>
-
+<br>
 {% endblock %}

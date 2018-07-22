@@ -1,37 +1,32 @@
 {% extends 'landing/base.html' %}
 {% block content %}
-
-<form class="email" id = "email" action="{% url 'landing:selectcourses' %}" method="post">
-
+<br>
+<div class="container" id="register">
+<form class="email" id="email" action="{% url 'landing:selectcourses' %}" method="post">
     {% csrf_token %}
-
-    enter email
-    </br>
-    </br>
-    <input type="text" name="email" class="MAVselect"/>
-
-
-    <div class="select" id="selectMajor">
-        <h3 style="font-size: 24pt; margin-bottom: -28px;">select degree</h3>
-        </br>
-        <p>
+    <h3>Enter Email</h3>
+    <input type="text" name="email" class="MAVselect" style="width:90%;"/>
+    <br>
+    <br>
+    <br>
+    <h3>Select Degree</h3>
+    <div class="row" style="border:none; margin-top: 0px;">
         <select class="MAVselect">
             <option selected disabled hidden>select degree</option>
-            <option value="bachelor's of science">bachelor's of science</option>
-            <option value="master's of science">master's of science</option>
-            <option value="doctorate of science">doctrate of science</option>
+            <option value="BS">Bachelor of Science</option>
+            <option value="BA">Bachelor of Arts</option>
+            <option value="MS">Master of Science</option>
         </select>
-        in
+        <p style="margin-top:20px;">in</p>
         <select class="MAVselect">
-            <option selected disabled hidden>select major</option>
-            <option value="computer science">computer science</option>
-            <option value="other">more majors coming soon!</option>
+            <option selected disabled hidden>Select Major</option>
+            <option value="CS">Computer Science</option>
+            <option value="ALT">More majors coming soon!</option>
         </select>
-        </p>
-        </br>
-        </br>
-        <input type="submit" value="submit" class="MAVbutton" style="padding: 8px 8px"/>
     </div>
+    <br>
+        <input type="submit" value="submit" class="MAVbutton"/>
 </form>
-
+</div>
+<br>
 {% endblock %}
