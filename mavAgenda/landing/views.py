@@ -122,6 +122,7 @@ def createSchedule(uID):
         if ( neededClasses != [] and isFull(semester[2])):
             schedule.add(semester)
             semester = generateNewSemester(semester)
+    return schedule
 
 #########################################
 
