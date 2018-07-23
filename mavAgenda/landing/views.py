@@ -10,6 +10,10 @@ from .models import User, Course, Degree, Req, Prereq, Complete
 #def selectdegree(request):
     #return render(request, 'landing/selectdegree.html')
 
+'''
+@login send a request to render the login.html page
+@param request: generates the response
+'''
 def login(request):
     return render(request, 'landing/login.html')
 #def get_email(request):
@@ -29,13 +33,24 @@ def login(request):
         #form = LoginForm()
 
 
-
+'''
+@selectcourses send a request to render the selectcourses.html page
+@param request: generates the response
+'''
 def selectcourses(request):
     return render(request, 'landing/selectcourses.html')
 
+'''
+@schedule send a request to render the schedule.html page
+@param request: generates the response
+'''
 def schedule(request):
     return render(request, 'landing/schedule.html')
 
+'''
+@createuser send a request to render the createuser.html page
+@param request: generates the response
+'''
 def createuser(request):
     return render(request, 'landing/createuser.html')
 

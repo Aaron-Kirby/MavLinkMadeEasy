@@ -2,7 +2,10 @@ from django.db import models
 
 
 # Models for static course backend data
-
+'''
+@Course collection of fields corresponding to attributes
+@param models.Model: associated data within fields
+'''
 class Course(models.Model):
     name = models.CharField(max_length=75)
     num = models.CharField(max_length=75)
@@ -48,6 +51,10 @@ class Course(models.Model):
     def __str__(self):
         return "%s | %s" % (self.num, self.name)
 
+'''
+@Prereq collection of fields corresponding to attributes
+@param models.Model: associated data within fields
+'''
 class Prereq(models.Model):
     prereq = models.ForeignKey('Course', on_delete=models.CASCADE)
     this_or = models.ForeignKey('Course', null=True, blank=True, related_name="synonymous", on_delete=models.CASCADE)
@@ -71,10 +78,10 @@ class Prereq(models.Model):
         return "%s - %s" % (self.prereq, self.req_type)
 
 '''
+@Req collection of fields corresponding to attributes
 Static degree type and associated requirements
-
+@param models.Model: associated data within fields
 '''
-
 class Req(models.Model):
     name = models.CharField(max_length=100)
     credits = models.IntegerField()
@@ -96,6 +103,10 @@ class Req(models.Model):
     def __str__(self):
         return "%s - %s" % (self.req_type, self.name)
 
+'''
+@Degree collection of fields corresponding to attributes
+@param models.Model: associated data within fields
+'''
 class Degree(models.Model):    
     BS = 'Bachelor of Science'
     BA = 'Bachelor of Arts'
@@ -115,8 +126,9 @@ class Degree(models.Model):
         return "%s | %s" % (self.degree, self.major)
 
 '''
+@Degree collection of fields corresponding to attributes
 Dynamic tables for users and associated courses needed/taken 
-
+@param models.Model: associated data within fields
 '''
 class User(models.Model):
     email = models.CharField(max_length=75)
@@ -128,6 +140,10 @@ class User(models.Model):
     def __str__(self):
         return "%s | %s" % (self.degree, self.email)
 
+'''
+@Complete collection of fields corresponding to attributes
+@param models.Model: associated data within fields
+'''
 class Complete(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     complete = models.ManyToManyField(Course, related_name="taken")

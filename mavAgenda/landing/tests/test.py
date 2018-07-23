@@ -1,6 +1,12 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
 
+'''
+@ UITests contain all of the classes that relate to performing actions on UI elements (i.e. buttons)
+param: StaticLiveServerTestCase allows for automated testing 
+at execution time by launching a server in the background & 
+shuts it down on teardown
+'''
 class UITests(StaticLiveServerTestCase):
 
     @classmethod

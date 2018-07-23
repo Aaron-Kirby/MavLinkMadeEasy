@@ -3,7 +3,11 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
-
+'''
+@Migration propogates changes made to models into database schema
+@param migrations.Migration: a migration file (changes to database)
+@return: none
+'''
 class Migration(migrations.Migration):
 
     initial = True
