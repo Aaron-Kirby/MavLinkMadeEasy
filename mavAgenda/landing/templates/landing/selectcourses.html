@@ -16,9 +16,9 @@
 
     {% csrf_token %}
 
-    <p>completed
-    {{form.complete}}
-    </p>
+    {% for cb in checkBoxes %}
+        <p><input type="checkbox" name={{cb.num}}>{{cb.name}}</p>
+    {% endfor %}
 
 	<button type="submit" class="MAVnextbutton" style="padding: 8px 8px">Submit</button>
 </form>

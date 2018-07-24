@@ -181,6 +181,18 @@ def createSchedule(uID):
     return schedule
 
 '''
+@generateCheckBoxEntities creates a list of tuples of course name and number for the selectcourses page
+@param uID: primary key corresponding to the active user
+'''
+def generateCheckBoxEntities(uID):
+    courseList = getCompletedByUser(uID)
+    checkBoxEntities = []
+    for c in courseList:
+        pair = (c.num, c.name)
+        checkBoxEntities.add(pair)
+    return checkBoxEntities
+
+'''
 @emailFound provides feedback if the email is already in the User database table
 @param email: email under test
 '''
@@ -192,7 +204,8 @@ def emailFound(email):
             found = True
     return found
 
-#########################################
+########################################################################################################################
+########################################################################################################################
 
 '''
 @login send a request to render the login.html page
@@ -222,18 +235,18 @@ def login(request):
 '''
 def selectcourses(request, pk):
     if request.method == "POST":
-        form = UserCompletedForm(request.POST)
-        if form.is_valid():
+        #form = UserCompletedForm(request.POST)
+        #if form.is_valid():
 
             # we want to delete everything from the UserCompleted table with the pk provided
             # then update to add the classes selected
 
-            courses = form.save(commit=False)
-            courses.save()
+            #courses = form.save(commit=False)
+            #courses.save()
             return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
     else:
-        form = UserCompletedForm()
-    return render(request, 'landing/selectcourses.html', {'form': form})
+        checkBoxes = generateCheckBoxEntities(pk)
+    return render(request, 'landing/selectcourses.html', {'checkBoxes': checkBoxes})
 
 '''
 @schedule send a request to render the schedule.html page
