@@ -13,6 +13,8 @@
     {% csrf_token %}
     <div class="select" id="selectMajor">
 
+        <p class="errormessage" id="errormessage">{{message}}</p>
+
         <p name="emailbox" class="MAVselect">email:{{emailForm.email}}</p>
 
         <p name ="degreedd" class="MAVselect">select degree:{{degreeForm.degree}}</p>
@@ -28,11 +30,6 @@
 
 </br>
 </br>
-
-
-
-
-
 
 </body>
 </html>

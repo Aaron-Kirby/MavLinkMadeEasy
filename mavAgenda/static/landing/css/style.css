@@ -87,6 +87,15 @@ img.center {
             float:left
         }
 
+        .errormessage {
+           background-color: red;
+           color: white;
+           border: 2px solid #ff0400;
+           border-radius: 4px;
+           font-size: 12pt;
+           font-family:Quotus-Bold;
+        }
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     [class*="box-"] {

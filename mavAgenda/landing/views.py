@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.db import datetime
 
 from .forms import *
+
+import datetime
 
 def getUserByEmail(e):
     userTable = User.objects.all()
@@ -124,6 +125,14 @@ def createSchedule(uID):
             semester = generateNewSemester(semester)
     return schedule
 
+def emailFound(email):
+    found = False
+    userTable = User.objects.all()
+    for cu in userTable:
+        if cu.email == email:
+            found = True
+    return found
+
 #########################################
 
 def login(request):
@@ -131,9 +140,14 @@ def login(request):
         emailForm = EmailForm(request.POST, prefix = "e")
         if emailForm.is_valid():
             eF = emailForm.save(commit=False)
-            u = getUserByEmail(eF.email)
-            userID = u.id
-            return HttpResponseRedirect(reverse('landing:schedule', args=(userID,)))
+            if emailFound(eF.email):
+                u = getUserByEmail(eF.email)
+                userID = u.id
+                return HttpResponseRedirect(reverse('landing:schedule', args=(userID,)))
+            else:
+                emailForm = EmailForm(prefix="e")
+                message = "Email not found"
+                return render(request, 'landing/login.html', {'emailForm': emailForm, 'message':message})
     else:
         emailForm = EmailForm(prefix="e")
     return render(request, 'landing/login.html', {'emailForm': emailForm, })
@@ -164,10 +178,16 @@ def createuser(request):
             dF = degreeForm.save(commit=False)
             eF = emailForm.save(commit=False)
             deg = getDegree(dF.degree, dF.major)
-            u = User(email = eF.email, degree=deg)
-            u.save()
-            userID = u.id
-            return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+            if emailFound(eF.email):
+                message = "Email already active"
+                emailForm = EmailForm(prefix="e")
+                degreeForm = DegreeForm(prefix="d")
+                return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'message': message})
+            else:
+                u = User(email = eF.email, degree=deg)
+                u.save()
+                userID = u.id
+                return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
     else:
         emailForm = EmailForm(prefix="e")
         degreeForm = DegreeForm(prefix="d")
