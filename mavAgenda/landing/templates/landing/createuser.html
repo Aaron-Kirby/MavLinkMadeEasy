@@ -22,9 +22,10 @@
 	    <p name ="majordd" class="MAVselect">select major: {{degreeForm.major}}</p>
 
         <p name ="majordd" class="MAVselect">select major with custom code:
-        <select>
+        <!-- please leave this name and id as is... django backend related (see Lauren for questions) -->
+        <select name="d-major" id="id_d-major">
             {% for m in majors %}
-            <option value=m>{{ m }}</option>
+                <option value={{m}}>{{ m }}</option>
             {% endfor %}
         </select>
         </p>

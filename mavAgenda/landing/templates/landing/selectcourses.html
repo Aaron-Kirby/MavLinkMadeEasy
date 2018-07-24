@@ -16,8 +16,8 @@
 
     {% csrf_token %}
 
-    {% for cb in {{checkBoxes}} %}
-        <p><input type="checkbox" name={{cb.num}}>{{cb.name}}</p>
+    {% for cb in checkBoxes %}
+        <input type="checkbox" value={{cb.num}}>{{ cb.name }}</input>
     {% endfor %}
 
 	<button type="submit" class="MAVnextbutton" style="padding: 8px 8px">Submit</button>
