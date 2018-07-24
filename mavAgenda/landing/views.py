@@ -6,18 +6,31 @@ from .forms import *
 
 import datetime
 
+'''
+@getUserByEmail searches the User table to find the User object with a corresponding email
+@param e: the email being searched for
+'''
 def getUserByEmail(e):
     userTable = User.objects.all()
     for cu in userTable:
         if cu.email == e:
             return cu
 
+'''
+@getDegree searches the Degree table to find the Degree object with corresponding degree and major
+@param d: degree attribute of Degree being searched for
+@param m: major attribute of Degree being searched for
+'''
 def getDegree(d, m):
     degreeTable = Degree.objects.all()
     for deg in degreeTable:
         if deg.major == m and deg.degree == d:
             return deg
 
+'''
+@getCompletedByUser provides a list of Course (objects) the user has taken
+@param uID: the primary key corresponding to the active user
+'''
 def getCompletedByUser(uID):
     cu = User.objects.get(pk=uID)
     completedCourses = []
@@ -27,6 +40,10 @@ def getCompletedByUser(uID):
             completedCourses.append(c)
     return completedCourses
 
+'''
+@getCoursesForUser provides a list of Course (objects) the user must complete for their respective Degree
+@param uID: the primary key corresponding to the active user
+'''
 def getCoursesForUser(uID):
     cu = User.objects.get(pk=uID)
     requiredCourses = []
@@ -34,6 +51,11 @@ def getCoursesForUser(uID):
         requiredCourses.append(cc)
     return requiredCourses
 
+'''
+@removeCoursesTaken provides a list of Course (objects) the user must still take (required, but not completed classes)
+@param requiredClasses: a list of Course (objects) required for the User's Degree
+@param classesTaken: a list of Course (objects) that the User has already completed
+'''
 def removeCoursesTaken( requiredClasses, classesTaken ):
     validCourses = []
     for rc in requiredClasses:
@@ -41,6 +63,12 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
             validCourses.add(rc)
     return validCourses
 
+'''
+@checkPrereqsMet determines if the User has met all Prereqs for a particular Course
+@param prereqs: a list of Course (objects) corresponding to Prereqs for a given Course
+@param classesTaken: a list of Course (objects) that the User has already completed
+@parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
+'''
 def checkPrereqsMet(preqreqs, classesTaken, scheduledClasses):
     met = True
     for pr in preqreqs:
@@ -49,6 +77,11 @@ def checkPrereqsMet(preqreqs, classesTaken, scheduledClasses):
             break
     return met
 
+'''
+@checkOfferedSemester determines if a given Course if offered during the current semester
+@param course: the Course under test
+@param ssf: the Spring, Summer, Fall, offering attribute of the Course
+'''
 def checkOfferedSemester(course, ssf):
     offered = False
     currentSem = "A"
@@ -62,7 +95,13 @@ def checkOfferedSemester(course, ssf):
         offered = True
     return offered
 
-
+'''
+@checkCourseValid determines if a given Course can be taken during a given semester
+@param course: the Course under test
+@param classesTaken: a list of Course (objects) that the User has already completed
+@parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
+@param ssf: the Spring, Summer, Fall, offering attribute of the Course
+'''
 def checkCourseValid(course, classesTaken, scheduledClasses, ssf):
     valid = False
     prereqs = course.prereqs
@@ -72,6 +111,10 @@ def checkCourseValid(course, classesTaken, scheduledClasses, ssf):
         valid = True
     return valid
 
+'''
+@getSemesterByMonthYear determines semester (Spring, Summer, Fall) according to current month
+@param m: current month
+'''
 def getSemesterByMonthYear( m ):
     if  m < 5 :
         title = "Spring"
@@ -81,6 +124,10 @@ def getSemesterByMonthYear( m ):
         title = "Fall"
     return title
 
+'''
+@generateNewSemester creates a new logical semester
+@param semester: previous semester list
+'''
 def generateNewSemester(semester):
     ssf = semester[0]
     y = semester[1]
@@ -96,6 +143,10 @@ def generateNewSemester(semester):
     semester[2].clear()
     return semester
 
+'''
+@isFull determines if a semester has hit the maximum number of credits allowable
+@param courseList: list of Course (objects) the user is scheduled to take during current semester
+'''
 def isFull(courseList):
     full = False
     totalCredits = 0
@@ -105,6 +156,10 @@ def isFull(courseList):
         full = True
     return full
 
+'''
+@createSchedule generates semester-by-semester schedule for User's needed Courses according to Degree
+@param uID: primary key associated with active user
+'''
 def createSchedule(uID):
     requiredClasses = getCoursesForUser(uID)
     classesTaken = User.objects.get(user_id = uID)
@@ -125,6 +180,10 @@ def createSchedule(uID):
             semester = generateNewSemester(semester)
     return schedule
 
+'''
+@emailFound provides feedback if the email is already in the User database table
+@param email: email under test
+'''
 def emailFound(email):
     found = False
     userTable = User.objects.all()
