@@ -18,7 +18,7 @@ class EmailForm(forms.ModelForm):
 class DegreeForm(forms.ModelForm):
     class Meta:
         model = Degree
-        fields = ('degree', 'major',)
+        fields = ('degree',)
 
 '''
 @UserForm collection of fields to track user's completed courses

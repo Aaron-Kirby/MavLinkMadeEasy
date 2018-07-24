@@ -278,7 +278,8 @@ def createuser(request):
         if emailForm.is_valid() and degreeForm.is_valid():
             dF = degreeForm.save(commit=False)
             eF = emailForm.save(commit=False)
-            deg = getDegree(dF.degree, dF.major)
+            selectedMajor = request.POST['d-major']
+            deg = getDegree(dF.degree, selectedMajor)
             if emailFound(eF.email):
                 message = "Email already active"
                 emailForm = EmailForm(prefix="e")
