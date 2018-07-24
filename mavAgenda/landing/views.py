@@ -135,6 +135,10 @@ def emailFound(email):
 
 #########################################
 
+'''
+@login send a request to render the login.html page
+@param request: generates the response
+'''
 def login(request):
     if request.method == "POST":
         emailForm = EmailForm(request.POST, prefix = "e")
@@ -152,6 +156,11 @@ def login(request):
         emailForm = EmailForm(prefix="e")
     return render(request, 'landing/login.html', {'emailForm': emailForm, })
 
+'''
+@selectcourses send a request to render the selectcourses.html page
+@param request: generates the response
+@param pk: primary key corresponding to active user
+'''
 def selectcourses(request, pk):
     if request.method == "POST":
         form = UserCompletedForm(request.POST)
@@ -167,9 +176,18 @@ def selectcourses(request, pk):
         form = UserCompletedForm()
     return render(request, 'landing/selectcourses.html', {'form': form})
 
+'''
+@schedule send a request to render the schedule.html page
+@param request: generates the response
+@param pk: primary key corresponding to active user
+'''
 def schedule(request, pk):
     return render(request, 'landing/schedule.html')
 
+'''
+@createuser send a request to render the createuser.html page
+@param request: generates the response
+'''
 def createuser(request):
     if request.method == "POST":
         emailForm = EmailForm(request.POST, prefix = "e")

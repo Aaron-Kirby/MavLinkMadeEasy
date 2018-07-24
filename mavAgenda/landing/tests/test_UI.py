@@ -4,6 +4,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
+'''
+@ UITests contain all of the classes that relate to performing actions on UI elements (i.e. buttons)
+param: StaticLiveServerTestCase allows for automated testing 
+at execution time by launching a server in the background & 
+shuts it down on teardown
+'''
 class UITests(StaticLiveServerTestCase):
 
     @classmethod
@@ -27,7 +33,6 @@ class UITests(StaticLiveServerTestCase):
         self.selenium.find_element_by_name("submit").click()
         assert 'schedule' in selenium.page_source
 
-    #Begin Kirby's tests!
     def test_selectcourses_form(self):
         selenium = self.selenium
         selenium.get('http://127.0.0.1:8000/landing/selectcourses/')
