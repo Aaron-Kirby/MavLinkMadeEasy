@@ -16,7 +16,7 @@
 
     {% csrf_token %}
 
-    {% for cb in checkBoxes %}
+    {% for cb in {{checkBoxes}} %}
         <p><input type="checkbox" name={{cb.num}}>{{cb.name}}</p>
     {% endfor %}
 

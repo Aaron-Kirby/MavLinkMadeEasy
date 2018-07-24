@@ -60,7 +60,7 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
     validCourses = []
     for rc in requiredClasses:
         if rc not in classesTaken :
-            validCourses.add(rc)
+            validCourses.append(rc)
     return validCourses
 
 '''
@@ -173,10 +173,10 @@ def createSchedule(uID):
     currentSemester = generateNewSemester(semester)
     for nc in neededClasses:
         if ( checkCourseValid( nc, classesTaken, schedule, ssfSemester ) ):
-            currentSemester[1].add(nc)
+            currentSemester[1].append(nc)
             neededClasses.remove(nc)
         if ( neededClasses != [] and isFull(semester[2])):
-            schedule.add(semester)
+            schedule.append(semester)
             semester = generateNewSemester(semester)
     return schedule
 
@@ -189,8 +189,19 @@ def generateCheckBoxEntities(uID):
     checkBoxEntities = []
     for c in courseList:
         pair = (c.num, c.name)
-        checkBoxEntities.add(pair)
+        checkBoxEntities.append(pair)
     return checkBoxEntities
+
+'''
+@generateMajorDD creates a list of possible majors for use on the createuser page
+'''
+def generateMajorDD():
+    allDegrees = Degree.objects.all()
+    majors = []
+    for d in allDegrees:
+        if d.major not in majors:
+            majors.append(d.major)
+    return majors
 
 '''
 @emailFound provides feedback if the email is already in the User database table
@@ -272,7 +283,8 @@ def createuser(request):
                 message = "Email already active"
                 emailForm = EmailForm(prefix="e")
                 degreeForm = DegreeForm(prefix="d")
-                return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'message': message})
+                majors = generateMajorDD()
+                return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'message': message, 'majors':majors})
             else:
                 u = User(email = eF.email, degree=deg)
                 u.save()
@@ -281,4 +293,5 @@ def createuser(request):
     else:
         emailForm = EmailForm(prefix="e")
         degreeForm = DegreeForm(prefix="d")
-    return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm})
+        majors = generateMajorDD()
+    return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'majors':generateMajorDD()})
