@@ -227,7 +227,7 @@ def saveClassesToUser(classesChecked, uID):
     u = User.objects.get(pk=uID)
     for cc in classesChecked:
         c = Course.objects.get(num=cc)
-        completed = Complete( user = u, course = c)
+        completed = Complete( user = u, complete = c)
         completed.save()
 
 '''
