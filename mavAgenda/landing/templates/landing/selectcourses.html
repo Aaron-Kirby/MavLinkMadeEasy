@@ -11,13 +11,12 @@
 <h3 align="center">select courses completed</h3>
 <p>place a check mark next to the classes you've completed</p>
 
-<h1> Select the classes you've taken </h1>
 <form method="POST" class="usercompleted-form">
 
     {% csrf_token %}
 
     {% for cb in checkBoxes %}
-        <input type="checkbox" value={{cb.num}}>{{ cb.name }}</input>
+        <input type="checkbox" value="{{cb.num}}">{{ cb.name }}</input>
     {% endfor %}
 
 	<button type="submit" class="MAVnextbutton" style="padding: 8px 8px">Submit</button>
