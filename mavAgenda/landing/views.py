@@ -189,8 +189,10 @@ def generateCheckBoxEntities(uID):
     courseList = getCoursesForUser(uID)
     checkBoxEntities = []
     for c in courseList:
-        pair = [c.num, c.name]
-        checkBoxEntities.append(pair)
+        number = c.num
+        name = c.name
+        #pair = [c.num, c.name]
+        checkBoxEntities.append([number,name])
     return checkBoxEntities
 
 '''
