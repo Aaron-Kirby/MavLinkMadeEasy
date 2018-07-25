@@ -48,7 +48,8 @@ def getCoursesForUser(uID):
     cu = User.objects.get(pk=uID)
     requiredCourses = []
     for cc in cu.degree.req.all():
-        requiredCourses.append(cc)
+        for r in cc.course.all():
+            requiredCourses.append(r)
     return requiredCourses
 
 '''
@@ -185,10 +186,10 @@ def createSchedule(uID):
 @param uID: primary key corresponding to the active user
 '''
 def generateCheckBoxEntities(uID):
-    courseList = getCompletedByUser(uID)
+    courseList = getCoursesForUser(uID)
     checkBoxEntities = []
     for c in courseList:
-        pair = (c.num, c.name)
+        pair = [c.num, c.name]
         checkBoxEntities.append(pair)
     return checkBoxEntities
 
@@ -214,6 +215,30 @@ def emailFound(email):
         if cu.email == email:
             found = True
     return found
+
+'''
+@saveClassesToUser updates database with a list of the user has taken
+@param classesChecked: list of courses the user specified as having taken
+@param uID: pk of the associated active user
+'''
+def saveClassesToUser(classesChecked, uID):
+    u = User.objects.get(pk=uID)
+    for cc in classesChecked:
+        c = Course.objects.get(num=cc)
+        completed = Complete( user = u, course = c)
+        completed.save()
+
+'''
+@removeUserCompletedEntries updates database to remove courses completed for a particular user
+@param uID: pk of the associated active user
+'''
+def removeUserCompletedEnteries(uID):
+    u = User.objects.get(pk=uID)
+    completedTable = Complete.objects.all()
+    for ce in completedTable:
+        if ce.user == u:
+            ce.delete()
+
 
 ########################################################################################################################
 ########################################################################################################################
@@ -246,18 +271,13 @@ def login(request):
 '''
 def selectcourses(request, pk):
     if request.method == "POST":
-        #form = UserCompletedForm(request.POST)
-        #if form.is_valid():
-
-            # we want to delete everything from the UserCompleted table with the pk provided
-            # then update to add the classes selected
-
-            #courses = form.save(commit=False)
-            #courses.save()
-            return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
+        removeUserCompletedEnteries(pk)
+        classesChecked = request.POST.getlist('chexmix')
+        saveClassesToUser(classesChecked, pk)
+        return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
     else:
         checkBoxes = generateCheckBoxEntities(pk)
-    return render(request, 'landing/selectcourses.html', {'checkBoxes': checkBoxes})
+    return render(request, 'landing/selectcourses.html', {'checkBoxes': generateCheckBoxEntities(pk)})
 
 '''
 @schedule send a request to render the schedule.html page
