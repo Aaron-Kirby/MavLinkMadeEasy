@@ -225,13 +225,25 @@ def emailFound(email):
 '''
 def saveClassesToUser(classesChecked, uID):
     u = User.objects.get(pk=uID)
+    completed = Complete(user=u)
+    completed.save()
     for cc in classesChecked:
         c = Course.objects.get(num=cc)
-        completed = Complete( user = u, complete = c)
-        completed.save()
+        print( c )
+        #completed = Complete(user=u)
+        #completed.save()
+
+        # need to get all the info for c
+        myCourse = Course.objects.create( name = c.name, num = c.num, semester = c.semester, credits = c.credits, prereqs = c.prereqs, special = c.special, comment = c.comment  )
+        completed.complete.add( user = u, c = myCourse )
+        #completed.save()
+        #c = Course.objects.get(num=cc)
+        #print(c)
+        #completed.complete.add()
+        #completed.save()
 
 '''
-@removeUserCompletedEntries updates database to remove courses completed for a particular user
+@removeUserCompletedEntries updates database to remove courses completed from a particular user
 @param uID: pk of the associated active user
 '''
 def removeUserCompletedEnteries(uID):
@@ -275,6 +287,7 @@ def selectcourses(request, pk):
     if request.method == "POST":
         removeUserCompletedEnteries(pk)
         classesChecked = request.POST.getlist('chexmix')
+        print( classesChecked )
         saveClassesToUser(classesChecked, pk)
         return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
     else:
