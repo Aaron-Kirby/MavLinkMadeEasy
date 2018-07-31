@@ -33,11 +33,7 @@ def getDegree(d, m):
 '''
 def getCompletedByUser(uID):
     cu = User.objects.get(pk=uID)
-    completedCourses = []
-    completedTable = Complete.objects.all()
-    for c in completedTable:
-        if c.user == cu:
-            completedCourses.append(c)
+    completedCourses = Complete.objects.get(user=cu)
     return completedCourses
 
 '''
@@ -230,12 +226,12 @@ def saveClassesToUser(classesChecked, uID):
     for cc in classesChecked:
         c = Course.objects.get(num=cc)
         print( c )
-        #completed = Complete(user=u)
-        #completed.save()
+        completed.complete.add(c)
+        completed.save()
 
         # need to get all the info for c
-        myCourse = Course.objects.create( name = c.name, num = c.num, semester = c.semester, credits = c.credits, prereqs = c.prereqs, special = c.special, comment = c.comment  )
-        completed.complete.add( user = u, c = myCourse )
+        #myCourse = Course.objects.create( name = c.name, num = c.num, semester = c.semester, credits = c.credits, prereqs = c.prereqs, special = c.special, comment = c.comment  )
+        #completed.complete.add( user = u, c = myCourse )
         #completed.save()
         #c = Course.objects.get(num=cc)
         #print(c)
