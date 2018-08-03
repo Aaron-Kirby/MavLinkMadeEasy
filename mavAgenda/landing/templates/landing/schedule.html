@@ -16,9 +16,9 @@
     <!-- this "box" div is for each semester -->
     <div class = "box" >
         <!-- print the Spring/Summer/Fall Semester and Year -->
-        <p class="boxheader">{{ semester.0 }} {{ semester.1 }}
-        {% for course in semester.2 %}}
-            <ul>{{ course ]}</ul>
+        <p class="boxheader">{{ semester.0 }} {{ semester.1 }}</p>
+        {% for course in semester.2 %}
+            <ul>{{ course }}</ul>
         {% endfor %}
     </div>
 {% endfor %}

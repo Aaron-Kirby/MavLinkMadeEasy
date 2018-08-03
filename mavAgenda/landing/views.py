@@ -123,17 +123,18 @@ def getSemesterByMonthYear( m ):
 '''
 def generateNewSemester(semester):
     ssf = semester[0]
+    nextSemester = ""
     y = semester[1]
     if ssf == "Spring" :
-        ssf = "Summer"
+        nextSemester = "Summer"
     elif ssf == "Summer" :
-        ssf = "Fall"
+        nextSemester = "Fall"
     else:
-        ssf == "Spring"
+        nextSemester ="Spring"
         y += 1
-    semester[0] = ssf
+    semester[0] = nextSemester
     semester[1] = y
-    semester[2].clear()
+    semester[2] = []
     return semester
 
 '''
@@ -161,25 +162,25 @@ def createSchedule(uID):
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
     ssfSemester = getSemesterByMonthYear(currentMonth)
-    semesterCourses = []
-    semester = [ssfSemester, currentYear, semesterCourses]
+    semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
     for nc in neededClasses:
-        if ( checkCourseValid( nc, classesTaken, ssfSemester ) ): # TODO - things get twisted here... never executing anything in if statement
-            print( "\nAppending course to semester :)" )
+        if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
             currentSemester[2].append(nc)
             print( "\nCurrent semester now looks like:")
             print( currentSemester[2] )
             classesTaken.append(nc)
-            print("\nAdding to classesTaken:")
-            print(classesTaken)
             neededClasses.remove(nc)
-            print( "\nCurrent schedule:")
-            print( schedule )
         if ( neededClasses != [] and isFull(semester[2])):
             print( "\nAppending semester to schedule")
-            schedule.append(semester)
+            schedule.append(semester[:])
+            print("\nBefore generateNewSemester schedule:")
+            print(schedule)
             semester = generateNewSemester(semester)
+            print("\nCurrent schedule:")
+            print( schedule )
+    print( "Adding last semester...")
+    schedule.append(semester[:])
     print( "\nFinal schedule!!!!!")
     print (schedule)
     return schedule
@@ -194,7 +195,6 @@ def generateCheckBoxEntities(uID):
     for c in courseList:
         number = c.num
         name = c.name
-        #pair = [c.num, c.name]
         checkBoxEntities.append([number,name])
     return checkBoxEntities
 
