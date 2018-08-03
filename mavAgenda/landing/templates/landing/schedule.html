@@ -12,27 +12,16 @@
 
 <h3 align="center">your schedule</h3>
 
-<div class="box">
-    <p class="boxheader">fall 2018</p>
-    <ul>(list a class here!)</ul>
-    <ul>(list another class here!)</ul>
-    <ul>(list yet another class here!)</ul>
-</div>
-
-<div class="box">
-    <p class="boxheader">spring 2019</p>
-    <p>(list all your classes here!</p>
-</div>
-
-<div class="box">
-    <p class="boxheader">fall 2019</p>
-    <p>(list all your classes here!</p>
-</div>
-
-<div class="box">
-    <p class="boxheader">spring 2010</p>
-    <p>(list all your classes here!</p>
-</div>
+{% for semester in schedule %}
+    <!-- this "box" div is for each semester -->
+    <div class = "box" >
+        <!-- print the Spring/Summer/Fall Semester and Year -->
+        <p class="boxheader">{{ semester.0 }} {{ semester.1 }}
+        {% for course in semester.2 %}}
+            <ul>{{ course ]}</ul>
+        {% endfor %}
+    </div>
+{% endfor %}
 
 {% endblock %}
 

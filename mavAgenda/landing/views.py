@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from .forms import *
 
-import datetime
+from datetime import datetime
 
 '''
 @getUserByEmail searches the User table to find the User object with a corresponding email
@@ -33,7 +33,9 @@ def getDegree(d, m):
 '''
 def getCompletedByUser(uID):
     cu = User.objects.get(pk=uID)
-    completedCourses = Complete.objects.get(user=cu)
+    completedCourses = []
+    for cc in Complete.objects.get(user=cu).complete.all():
+        completedCourses.append(cc)
     return completedCourses
 
 '''
@@ -66,10 +68,10 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
 @param classesTaken: a list of Course (objects) that the User has already completed
 @parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
 '''
-def checkPrereqsMet(preqreqs, classesTaken, scheduledClasses):
+def checkPrereqsMet(preqreqs, classesTaken):
     met = True
     for pr in preqreqs:
-        if pr not in classesTaken and pr not in scheduledClasses:
+        if pr not in classesTaken:
             met = False
             break
     return met
@@ -81,14 +83,7 @@ def checkPrereqsMet(preqreqs, classesTaken, scheduledClasses):
 '''
 def checkOfferedSemester(course, ssf):
     offered = False
-    currentSem = "A"
-    if ssf == "Spring":
-        currentSem = "S"
-    elif ssf == "Summer":
-        currentSem = "M"
-    else:
-        currentSem = "F"
-    if course.semester == currentSem or course.semester == 'A':
+    if course.semester == ssf or course.semester == 'All':
         offered = True
     return offered
 
@@ -99,13 +94,14 @@ def checkOfferedSemester(course, ssf):
 @parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
 @param ssf: the Spring, Summer, Fall, offering attribute of the Course
 '''
-def checkCourseValid(course, classesTaken, scheduledClasses, ssf):
+def checkCourseValid(course, classesTaken, ssf): #checkCourseValid( nc, classesTaken, semesterCourses, ssfSemester )
     valid = False
-    prereqs = course.prereqs
-    prereqsMet = checkPrereqsMet(prereqs, classesTaken, scheduledClasses)
+    prereqs = course.prereqs.all()
+    prereqsMet = checkPrereqsMet(prereqs, classesTaken)
     offered = checkOfferedSemester(course, ssf)
     if prereqsMet and offered:
         valid = True
+        print( "Course is valid for this semester :)")
     return valid
 
 '''
@@ -159,22 +155,33 @@ def isFull(courseList):
 '''
 def createSchedule(uID):
     requiredClasses = getCoursesForUser(uID)
-    classesTaken = User.objects.get(user_id = uID)
+    classesTaken = getCompletedByUser(uID)
     neededClasses = removeCoursesTaken( requiredClasses, classesTaken )
     schedule = []
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
     ssfSemester = getSemesterByMonthYear(currentMonth)
     semesterCourses = []
-    semester = (ssfSemester, currentYear, semesterCourses)
+    semester = [ssfSemester, currentYear, semesterCourses]
     currentSemester = generateNewSemester(semester)
     for nc in neededClasses:
-        if ( checkCourseValid( nc, classesTaken, schedule, ssfSemester ) ):
-            currentSemester[1].append(nc)
+        if ( checkCourseValid( nc, classesTaken, ssfSemester ) ): # TODO - things get twisted here... never executing anything in if statement
+            print( "\nAppending course to semester :)" )
+            currentSemester[2].append(nc)
+            print( "\nCurrent semester now looks like:")
+            print( currentSemester[2] )
+            classesTaken.append(nc)
+            print("\nAdding to classesTaken:")
+            print(classesTaken)
             neededClasses.remove(nc)
+            print( "\nCurrent schedule:")
+            print( schedule )
         if ( neededClasses != [] and isFull(semester[2])):
+            print( "\nAppending semester to schedule")
             schedule.append(semester)
             semester = generateNewSemester(semester)
+    print( "\nFinal schedule!!!!!")
+    print (schedule)
     return schedule
 
 '''
@@ -228,15 +235,6 @@ def saveClassesToUser(classesChecked, uID):
         print( c )
         completed.complete.add(c)
         completed.save()
-
-        # need to get all the info for c
-        #myCourse = Course.objects.create( name = c.name, num = c.num, semester = c.semester, credits = c.credits, prereqs = c.prereqs, special = c.special, comment = c.comment  )
-        #completed.complete.add( user = u, c = myCourse )
-        #completed.save()
-        #c = Course.objects.get(num=cc)
-        #print(c)
-        #completed.complete.add()
-        #completed.save()
 
 '''
 @removeUserCompletedEntries updates database to remove courses completed from a particular user
@@ -296,7 +294,7 @@ def selectcourses(request, pk):
 @param pk: primary key corresponding to active user
 '''
 def schedule(request, pk):
-    return render(request, 'landing/schedule.html')
+    return render(request, 'landing/schedule.html', {'schedule': createSchedule(pk)})
 
 '''
 @createuser send a request to render the createuser.html page
