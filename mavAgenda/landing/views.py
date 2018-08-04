@@ -33,6 +33,7 @@ def getDegree(d, m):
 '''
 def getCompletedByUser(uID):
     cu = User.objects.get(pk=uID)
+    print("Current user: %s" % cu)
     completedCourses = []
     for cc in Complete.objects.get(user=cu).complete.all():
         completedCourses.append(cc)
@@ -101,7 +102,6 @@ def checkCourseValid(course, classesTaken, ssf): #checkCourseValid( nc, classesT
     offered = checkOfferedSemester(course, ssf)
     if prereqsMet and offered:
         valid = True
-        print( "Course is valid for this semester :)")
     return valid
 
 '''
@@ -167,22 +167,12 @@ def createSchedule(uID):
     for nc in neededClasses:
         if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
             currentSemester[2].append(nc)
-            print( "\nCurrent semester now looks like:")
-            print( currentSemester[2] )
             classesTaken.append(nc)
             neededClasses.remove(nc)
         if ( neededClasses != [] and isFull(semester[2])):
-            print( "\nAppending semester to schedule")
             schedule.append(semester[:])
-            print("\nBefore generateNewSemester schedule:")
-            print(schedule)
             semester = generateNewSemester(semester)
-            print("\nCurrent schedule:")
-            print( schedule )
-    print( "Adding last semester...")
     schedule.append(semester[:])
-    print( "\nFinal schedule!!!!!")
-    print (schedule)
     return schedule
 
 '''
@@ -228,8 +218,13 @@ def emailFound(email):
 '''
 def saveClassesToUser(classesChecked, uID):
     u = User.objects.get(pk=uID)
-    completed = Complete(user=u)
-    completed.save()
+    if u in Complete.objects.all():
+        print("Found a user with same ID, so setting complete to it!")
+        completed = Complete.objects.get(user_id=u)
+    else:
+        print("Creating new user!")
+        completed = Complete(user=u)
+        completed.save()
     for cc in classesChecked:
         c = Course.objects.get(num=cc)
         print( c )
@@ -294,7 +289,7 @@ def selectcourses(request, pk):
 @param pk: primary key corresponding to active user
 '''
 def schedule(request, pk):
-    return render(request, 'landing/schedule.html', {'schedule': createSchedule(pk)})
+    return render(request, 'landing/schedule.html', {'schedule': createSchedule(pk), 'userID': pk})
 
 '''
 @createuser send a request to render the createuser.html page

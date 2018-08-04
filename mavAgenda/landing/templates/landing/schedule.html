@@ -23,6 +23,17 @@
     </div>
 {% endfor %}
 
+
+<form class="joinnow" id = "joinnow" action="{% url 'landing:selectcourses' pk=userID %}" method="post">
+
+    {% csrf_token %}
+
+    <p align="center">
+    <input type="submit" value="update courses completed" class="MAVbutton"  style="padding: 8px 8px"/>
+    </p>
+
+</form>
+
 {% endblock %}
 
 </body>
