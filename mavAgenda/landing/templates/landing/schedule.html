@@ -24,15 +24,31 @@
 {% endfor %}
 
 
-<form class="joinnow" id = "joinnow" action="{% url 'landing:selectcourses' pk=userID %}" method="post">
-
-    {% csrf_token %}
+<form class="joinnow" id = "joinnow" action="{% url 'landing:selectcourses' pk=userID %}" method="get">
 
     <p align="center">
     <input type="submit" value="update courses completed" class="MAVbutton"  style="padding: 8px 8px"/>
     </p>
 
 </form>
+
+
+<!-- CANDIDATE FOR FUTURE DEVELOPMENT -->
+<!--
+    Right now, our views are set up so that on the createuser page, there can't be a userID...
+    We should either find a way to allow a userID so that the user could change their major, or
+    provide a separate page for update to this information (in addition to things like
+    maximum number of credits desired in a semester, fulltime/parttime, and summer class options)
+-->
+<!--
+<form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="get">
+
+    <p align="center">
+    <input type="submit" value="update major" class="MAVbutton"  style="padding: 8px 8px"/>
+    </p>
+
+</form>
+-->
 
 {% endblock %}
 
