@@ -1,43 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MavLINK Made Easy - Landing Page</title>
-</head>
-
-<body>
-
-{% extends 'landing/base.html' %}
+nding/base.html' %}
 {% block content %}
+<br>
+<div class="container" id="register">
+
+    <h3>Login</h3>
+    <p align="center">
+        with your e-mail
+    </p>
 
 <form class="email" id = "email" method="post">
 
     {% csrf_token %}
 
-    </br>
-
-    enter email
     <p class="errormessage" id="errormessage">{{message}}</p>
     <p name="emailbox" >
         {{emailForm.email}}
-        <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
+        <br><br><input type="submit" value="login" class="MAVbutton"/>
     </p>
 
 </form>
 
 </br>
 </br>
+
+    <h3>Register</h3>
 
 <form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="post">
 
     {% csrf_token %}
 
-    <p align="center">not a user?
-    <input type="submit" value="sign up!" class="MAVbutton"  style="padding: 8px 8px"/>
+    <p align="center">
+        create an account
+    <br><br><input type="submit" value="sign up!" class="MAVbutton"/>
     </p>
 
 </form>
+</div>
 
 {% endblock %}
-
-</body>
-</html>

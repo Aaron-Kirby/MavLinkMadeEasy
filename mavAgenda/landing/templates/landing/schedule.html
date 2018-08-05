@@ -1,33 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>schedule</title>
-</head>
-<body class="MAVfont">
-
 {% extends 'landing/base.html' %}
-
 {% block content %}
+<br>
 
-<h3 align="center">your schedule</h3>
-
+<h3>Your Generated Schedule</h3>
+<br>
 {% for semester in schedule %}
     <!-- this "box" div is for each semester -->
     <div class = "box" >
         <!-- print the Spring/Summer/Fall Semester and Year -->
         <p class="boxheader">{{ semester.0 }} {{ semester.1 }}</p>
         {% for course in semester.2 %}
-            <ul>{{ course }}</ul>
+        <p>{{ course }} >>> {{ course.credits }} credits </p>
         {% endfor %}
     </div>
+<br>
 {% endfor %}
-
-
+<br>
 <form class="joinnow" id = "joinnow" action="{% url 'landing:selectcourses' pk=userID %}" method="get">
 
     <p align="center">
-    <input type="submit" value="update courses completed" class="MAVbutton"  style="padding: 8px 8px"/>
+    <input type="submit" value="update courses completed" class="MAVbutton"/>
     </p>
 
 </form>
@@ -51,6 +43,3 @@
 -->
 
 {% endblock %}
-
-</body>
-</html>

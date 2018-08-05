@@ -1,27 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MavLINK Made Easy - Select Courses Completed</title>
-</head>
-<body>
-
 {% extends 'landing/base.html' %}
 {% block content %}
-
-<h3 align="center">select courses completed</h3>
-<p>place a check mark next to the classes you've completed</p>
-
+<br>
+<h3>Select Courses Completed</h3>
+<p align="center">Place a check mark next to the classes you've already taken</p>
+<br><br>
 <form method="POST" class="usercompleted-form">
-
     {% csrf_token %}
-
-    {% for cb in checkBoxes %}
-        <p><input type="checkbox" name = "chexmix" value="{{cb.0}}">{{cb.0}} - {{ cb.1 }}</input></p>
+    {% for r in checkBoxes %}
+    <p><b>{{ r.1 }}</b> | {{ r.2 }} | <i>{{ r.3 }} credits needed</i></p>
+    <hr>
+    <p>
+        {% for cb in r.4 %}
+        <input type="checkbox" name = "chexmix" value="{{cb.0}}"><b>{{cb.0}}</b> {{ cb.1 }}</input>
+        <br>
+        {% endfor %}
+        <br>
+    </p>
     {% endfor %}
-
-	<button type="submit" class="MAVnextbutton" style="padding: 8px 8px">Submit</button>
+    <br>
+	<button type="submit" class="MAVbutton">Submit</button>
 </form>
-{% endblock%}
 
-</body>
-</html>
+{% endblock %}

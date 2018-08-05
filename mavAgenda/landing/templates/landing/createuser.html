@@ -1,43 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MavLINK Made Easy - Landing Page</title>
-</head>
-<body>
-
 {% extends 'landing/base.html' %}
 {% block content %}
 
 <form method="POST" class="email" id = "email">
 
     {% csrf_token %}
+    <br>
     <div class="select" id="selectMajor">
 
         <p class="errormessage" id="errormessage">{{message}}</p>
 
-        <p name="emailbox" class="MAVselect">email:{{emailForm.email}}</p>
+        <h3 name="emailbox" class="MAVselect">Email: {{emailForm.email}}</h3>
 
-        <p name ="degreedd" class="MAVselect">select degree:{{degreeForm.degree}}</p>
+        <h3 name ="degreedd" class="MAVselect">Degree: {{degreeForm.degree}}</h3>
 
-        <p name ="majordd" class="MAVselect">select major with custom code:
+        <h3 name ="majordd" class="MAVselect">Major:
         <!-- please leave this name and id as is... django backend related (see Lauren for questions) -->
         <select name="d-major" id="id_d-major">
             {% for m in majors %}
                 <option value="{{m}}">{{ m }}</option>
             {% endfor %}
         </select>
-        </p>
-
-
-    	<button type="submit" name="submit" value="submit" class="MAVbutton" style="padding: 8px 8px">submit</button>
-
+            <br><br>
+        </h3>
+        <button type="submit" name="submit" value="submit" class="MAVbutton">submit</button>
     </div>
 
 </form>
-{% endblock%}
+<br>
 
-</br>
-</br>
-
-</body>
-</html>
+{% endblock %}
