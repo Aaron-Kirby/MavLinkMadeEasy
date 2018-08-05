@@ -176,16 +176,25 @@ def createSchedule(uID):
     return schedule
 
 '''
-@generateCheckBoxEntities creates a list of tuples of course name and number for the selectcourses page
+@generateCheckBoxEntities creates a list of tuples of requirements, course names and numbers for the selectcourses page
 @param uID: primary key corresponding to the active user
 '''
 def generateCheckBoxEntities(uID):
-    courseList = getCoursesForUser(uID)
+    reqs = Degree.objects.get(user=uID).req.all()
     checkBoxEntities = []
-    for c in courseList:
-        number = c.num
-        name = c.name
-        checkBoxEntities.append([number,name])
+    for r in reqs:
+        req_id = r.id
+        req_name = r.name
+        req_type = r.req_type
+        req_creds = r.credits
+        catalog = r.course.all()
+        courseList = []
+        for g in catalog:
+            number = g.num
+            name = g.name
+            creds = g.credits
+            courseList.append([number,name,creds])
+        checkBoxEntities.append([req_id, req_name, req_type, req_creds, courseList])
     return checkBoxEntities
 
 '''
