@@ -49,6 +49,8 @@ def getCoursesForUser(uID):
     for cc in cu.degree.req.all():
         for r in cc.course.all():
             requiredCourses.append(r)
+    print( "Number of required Courses:")
+    print( len(requiredCourses) )
     return requiredCourses
 
 '''
@@ -156,23 +158,39 @@ def isFull(courseList):
 '''
 def createSchedule(uID):
     requiredClasses = getCoursesForUser(uID)
+    print( "Required classes length:")
+    print( len(requiredClasses) )
     classesTaken = getCompletedByUser(uID)
+    print("Classes taken length:")
+    print(len(classesTaken))
     neededClasses = removeCoursesTaken( requiredClasses, classesTaken )
+    print("Needed classes length:")
+    print(len(neededClasses))
     schedule = []
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
     ssfSemester = getSemesterByMonthYear(currentMonth)
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
-    for nc in neededClasses:
-        if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
-            currentSemester[2].append(nc)
-            classesTaken.append(nc)
-            neededClasses.remove(nc)
-        if ( neededClasses != [] and isFull(semester[2])):
-            schedule.append(semester[:])
-            semester = generateNewSemester(semester)
+    total = 0
+    while neededClasses != []:
+        print( "neededClasses now: %s" % len(neededClasses) )
+        for nc in neededClasses:
+            print( nc )
+            if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
+                print( "Course valid!" )
+                currentSemester[2].append(nc)
+                classesTaken.append(nc)
+                neededClasses.remove(nc)
+            if ( neededClasses != [] and isFull(semester[2])):
+                schedule.append(semester[:])
+                total += len(semester[2])
+                semester = generateNewSemester(semester)
+                print( "Starting new semester!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                break
     schedule.append(semester[:])
+    print("Schedule classes length:")
+    print(total)
     return schedule
 
 '''
@@ -290,6 +308,7 @@ def selectcourses(request, pk):
         return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
     else:
         checkBoxes = generateCheckBoxEntities(pk)
+        # might need to write some logic here to determine if boxes have already been checked :)
     return render(request, 'landing/selectcourses.html', {'checkBoxes': generateCheckBoxEntities(pk)})
 
 '''

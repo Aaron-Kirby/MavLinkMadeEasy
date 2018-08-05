@@ -27,5 +27,18 @@ class YourTestClass(TestCase):
         foundDegree = getDegree("Bachelor's of Science", "CS")
         self.assertTrue(deg==foundDegree)
 
-    #def test_get_completed_by_user(self):
-        #self.assertTrue(False)
+    def test_check_prereqs(self):
+        classesTaken = []
+        collegeAl = Course(id=1, name="College Algebra", num="MATH 1220", semester='All', credits=3 )
+        collegeAl.save()
+        coAl = Prereq(id=3, prereq=collegeAl, req_type="Prerequisite")
+        precalcAlgebra=Course(id=2, name="Pre-Calculus Algebra", num="MATH 1320", semester='All', credits=3)
+        precalcAlgebra.save()
+        precalcAlgebra.prereqs.add(coAl)
+        precalcAlgebra.save()
+        pr = Course.objects.get(name="Pre-Calculus Algebra").prereqs.all()
+        print( "Prereqs: %s" % pr)
+        c1 = Course.objects.get(name="College Algebra")
+        classesTaken.append(c1)
+        print( "Classes taken: %s" % classesTaken )
+        self.assertTrue(checkPrereqsMet(pr, classesTaken))
