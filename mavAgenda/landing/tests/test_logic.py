@@ -2,6 +2,11 @@ from django.test import TestCase
 
 from ..views import *
 from ..models import *
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 class YourTestClass(TestCase):
 
@@ -9,7 +14,7 @@ class YourTestClass(TestCase):
         #Setup run before every test method.
         pass
 
-    def tearDown(self):
+    def tearDown(cself):
         #Clean up run after every test method.
         pass
 
@@ -31,14 +36,21 @@ class YourTestClass(TestCase):
     def test_get_completed_by_user(self):
         d = Degree(degree="Bachelor's of Science", major="CS")
         d.save()
-        u = User(email="completedByUser@test.com", degree=d)
+        u = User(email="completedbyuser@test.com", degree=d)
         u.save()
         uID = u.pk
-        completedCourses = []
-        self.assertTrue(completedCourses == getCompletedByUser(uID))
+        completed = Complete(user=u)
+        completed.save()
+        cc = Course(name="Java1", num="CIST1400", semester = "A", credits=3, special="N")
+        cc.save()
+        print(cc)
+        completed.complete.add(cc)
+        completed.save()
+        print(getCompletedByUser(uID))
+        self.assertTrue([cc] == getCompletedByUser(uID))
 
 
-    #def test_get_courses_for_user(self):
+    def test_get_courses_for_user(self):
 
     #def test_remove_courses_taken(self):
 
