@@ -72,7 +72,7 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
 def checkPrereqsMet(preqreqs, classesTaken):
     met = True
     for pr in preqreqs:
-        if pr not in classesTaken:
+        if pr.prereq not in classesTaken and pr.this_or not in classesTaken:
             met = False
             break
     return met

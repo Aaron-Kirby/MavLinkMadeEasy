@@ -32,7 +32,6 @@ class YourTestClass(TestCase):
         foundDegree = getDegree("Bachelor's of Science", "CS")
         self.assertTrue(deg==foundDegree)
 
-    #for user at inception
     def test_get_completed_by_user(self):
         d = Degree(degree="Bachelor's of Science", major="CS")
         d.save()
@@ -43,18 +42,70 @@ class YourTestClass(TestCase):
         completed.save()
         cc = Course(name="Java1", num="CIST1400", semester = "A", credits=3, special="N")
         cc.save()
-        print(cc)
         completed.complete.add(cc)
         completed.save()
-        print(getCompletedByUser(uID))
         self.assertTrue([cc] == getCompletedByUser(uID))
 
+    #def test_check_course_valid(self):
+        #d = Degree(degree="Bachelor's of Science", major="CS")
+        #d.save()
+        #u = User(email="completedbyuser@test.com", degree=d)
+        #u.save()
+        #uID = u.pk
+        #completed = Complete(user=u)
+        #completed.save()
+        #cc = Course(name="Java1", num="CIST1400", semester="A", credits=3, special="N")
+        #cc.save()
+        #completed.complete.add(cc)
+        #completed.save()
+        #print("completed: %s" % Complete.objects.get(user=u).complete.all())
 
-    def test_get_courses_for_user(self):
+
+    #def test_get_courses_for_user(self):
 
     #def test_remove_courses_taken(self):
 
-    #def test_check_prereq_met(self):
+    def test_check_prereqs_met(self):
+        classesTaken = []
+        prereqs = []
+        collegeAl = Course(id=1, name="College Algebra", num="MATH 1220", semester='All', credits=3)
+        collegeAl.save()
+        coAl = Prereq(id=3, prereq=collegeAl, req_type="Prerequisite")
+        coAl.save()
+        precalcAlgebra = Course(id=2, name="Pre-Calculus Algebra", num="MATH 1320", semester='All', credits=3)
+        precalcAlgebra.save()
+        precalcAlgebra.prereqs.add(coAl)
+        precalcAlgebra.save()
+        pr = Course.objects.get(name="Pre-Calculus Algebra").prereqs.all()
+        for p in pr:
+            prereqs.append(p)
+        c1 = Course.objects.get(name="College Algebra")
+        classesTaken.append(c1)
+        self.assertTrue(checkPrereqsMet(pr, classesTaken))
+
+    def test_check_prereqs_met_with_thisor(self):
+        classesTaken = []
+        prereqs = []
+        collegeAl = Course(id=1, name="College Algebra", num="MATH 1220", semester='All', credits=3)
+        collegeAl.save()
+        test = Course(id=2, name="Testing", num="TEST 1234", semester='All', credits=3)
+        test.save()
+        pr = Prereq(id=3, prereq=collegeAl, this_or=test, req_type="Prerequisite")
+        pr.save()
+        # testpr = Prereq(id=3, prereq=test, req_type="Prerequisite")
+        # testpr.save()
+        precalcAlgebra = Course(id=2, name="Pre-Calculus Algebra", num="MATH 1320", semester='All', credits=3)
+        precalcAlgebra.save()
+        precalcAlgebra.prereqs.add(pr)
+        precalcAlgebra.save()
+        pr = Course.objects.get(name="Pre-Calculus Algebra").prereqs.all()
+        for p in pr:
+            prereqs.append(p)
+        print("Prereqs (Options): %s" % prereqs)
+        # t = Course.objects.get(name="Testing")
+        classesTaken.append(test)
+        print("Classes taken: %s" % classesTaken)
+        self.assertTrue(checkPrereqsMet(pr, classesTaken))
 
     #def test_check_offered_semester(self):
 
