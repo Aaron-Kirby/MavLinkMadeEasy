@@ -206,7 +206,6 @@ def createSchedule(uID):
         if scheduleComplete:
             print( "BREAKING FREEEEEEE!!!!")
             break
-    schedule.append(semester[:])
     return schedule
 
 '''
