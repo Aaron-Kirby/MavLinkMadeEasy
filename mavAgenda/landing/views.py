@@ -33,7 +33,6 @@ def getDegree(d, m):
 '''
 def getCompletedByUser(uID):
     cu = User.objects.get(pk=uID)
-    print("Current user: %s" % cu)
     completedCourses = []
     for cc in Complete.objects.get(user=cu).complete.all():
         completedCourses.append(cc)
@@ -55,8 +54,6 @@ def getCoursesForUser(uID):
                 additionalCourse = Course.objects.get(id=pr.prereq.id)
                 if additionalCourse not in requiredCourses:
                     requiredCourses.append(additionalCourse)
-    print( "Number of required Courses:")
-    print( len(requiredCourses) )
     return requiredCourses
 
 '''
@@ -164,6 +161,7 @@ def isFull(courseList):
 '''
 def createSchedule(uID):
     loopCount = 0
+    maxLoopCount = 35
     reqTracker = [] #used to track if Req credit quotas have been met
     requiredClasses = getCoursesForUser(uID)
     reqs = Degree.objects.get(user=uID).req.all()
@@ -174,31 +172,23 @@ def createSchedule(uID):
         req_creds = r.credits
         req_start = 0
         reqTracker.append([req_id, req_name, req_type, req_creds, req_start])
-    print( "Required classes length: %s" % len(requiredClasses))
     classesTaken = getCompletedByUser(uID)
-    print("Classes taken length: %s" % len(classesTaken))
     neededClasses = removeCoursesTaken( requiredClasses, classesTaken )
-    print("Needed classes length: %s" % len(neededClasses))
     schedule = []
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
     ssfSemester = getSemesterByMonthYear(currentMonth)
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
-    total = 0
     scheduleComplete = True
     for c in classesTaken:
         for r in reqTracker:  # determine which Req this course falls under
             if c in Req.objects.get(id=r[0]).course.all():
                 r[4] += c.credits  # increment the completed running total for that Req
-    while neededClasses != [] and loopCount < 30:
+    while neededClasses != [] and loopCount < maxLoopCount:
         loopCount+=1
-        print( loopCount )
-        print( "neededClasses now: %s" % len(neededClasses) )
         for nc in neededClasses:
-            print( nc )
             if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
-                print( "Course valid!" )
                 currentSemester[2].append(nc)
                 classesTaken.append(nc)
                 neededClasses.remove(nc)
@@ -207,23 +197,16 @@ def createSchedule(uID):
                         r[4]+=nc.credits # increment the completed running total for that Req
             if ( neededClasses != [] and isFull(semester[2])):
                 schedule.append(semester[:])
-                total += len(semester[2])
                 semester = generateNewSemester(semester)
-                print( "Starting new semester!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 break
             scheduleComplete = True
             for r in reqTracker:
-                #print( r )
                 if r[3] > r[4]:
                     scheduleComplete = False
-        for r in reqTracker:
-            print( r )
         if scheduleComplete:
             print( "BREAKING FREEEEEEE!!!!")
             break
     schedule.append(semester[:])
-    print("Schedule classes length:")
-    print(total)
     return schedule
 
 '''
@@ -232,7 +215,6 @@ def createSchedule(uID):
 '''
 def generateCheckBoxEntities(uID):
     reqs = Degree.objects.get(user=uID).req.all()
-    total = 0
     checkBoxEntities = []
     for r in reqs:
         req_id = r.id
@@ -246,9 +228,7 @@ def generateCheckBoxEntities(uID):
             name = g.name
             creds = g.credits
             courseList.append([number,name,creds])
-            total+= 1
         checkBoxEntities.append([req_id, req_name, req_type, req_creds, courseList])
-    print( "Checkboxes: %s" % total)
     return checkBoxEntities
 
 '''
@@ -282,15 +262,12 @@ def emailFound(email):
 def saveClassesToUser(classesChecked, uID):
     u = User.objects.get(pk=uID)
     if u in Complete.objects.all():
-        print("Found a user with same ID, so setting complete to it!")
         completed = Complete.objects.get(user_id=u)
     else:
-        print("Creating new user!")
         completed = Complete(user=u)
         completed.save()
     for cc in classesChecked:
         c = Course.objects.get(num=cc)
-        print( c )
         completed.complete.add(c)
         completed.save()
 
@@ -339,7 +316,6 @@ def selectcourses(request, pk):
     if request.method == "POST":
         removeUserCompletedEnteries(pk)
         classesChecked = request.POST.getlist('chexmix')
-        print( classesChecked )
         saveClassesToUser(classesChecked, pk)
         return HttpResponseRedirect(reverse('landing:schedule', args=(pk,)))
     else:
