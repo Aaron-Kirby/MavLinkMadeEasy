@@ -99,10 +99,7 @@ class YourTestClass(TestCase):
         pr = Course.objects.get(name="Pre-Calculus Algebra").prereqs.all()
         for p in pr:
             prereqs.append(p)
-        print("Prereqs (Options): %s" % prereqs)
-        # t = Course.objects.get(name="Testing")
         classesTaken.append(test)
-        print("Classes taken: %s" % classesTaken)
         self.assertTrue(checkPrereqsMet(pr, classesTaken, []))
 
     #def test_check_offered_semester(self):
