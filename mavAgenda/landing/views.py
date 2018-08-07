@@ -157,20 +157,22 @@ def isFull(courseList):
 @param uID: primary key associated with active user
 '''
 def createSchedule(uID):
-    englishwriting = 0
-    math = 0
-    publicspeaking = 0
-    natandphysscience = 0
     loopCount = 0
+    reqTracker = [] #used to track if Req credit quotas have been met
     requiredClasses = getCoursesForUser(uID)
-    print( "Required classes length:")
-    print( len(requiredClasses) )
+    reqs = Degree.objects.get(user=uID).req.all()
+    for r in reqs:
+        req_id = r.id
+        req_name = r.name
+        req_type = r.req_type
+        req_creds = r.credits
+        req_start = 0
+        reqTracker.append([req_id, req_name, req_type, req_creds, req_start])
+    print( "Required classes length: %s" % len(requiredClasses))
     classesTaken = getCompletedByUser(uID)
-    print("Classes taken length:")
-    print(len(classesTaken))
+    print("Classes taken length: %s" % len(classesTaken))
     neededClasses = removeCoursesTaken( requiredClasses, classesTaken )
-    print("Needed classes length:")
-    print(len(neededClasses))
+    print("Needed classes length: %s" % len(neededClasses))
     schedule = []
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
@@ -178,7 +180,7 @@ def createSchedule(uID):
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
     total = 0
-    while neededClasses != [] and loopCount < 10:
+    while neededClasses != [] and loopCount < 15:
         loopCount+=1
         print( loopCount )
         print( "neededClasses now: %s" % len(neededClasses) )
@@ -189,6 +191,13 @@ def createSchedule(uID):
                 currentSemester[2].append(nc)
                 classesTaken.append(nc)
                 neededClasses.remove(nc)
+                for r in reqTracker: # determine which Req this course falls under
+                    if nc in Req.objects.get(id=r[0]).course.all():
+                        r[4]+=nc.credits # increment the completed running total for that Req
+                        if r[3] <= r[4]: # determine if the max number of credits has been reached for that Req
+                            for c in neededClasses: # eliminate all the other courses in the Req from needed classes
+                                if c in Req.objects.get(id=r[0]).course.all():
+                                    neededClasses.remove(c)
             if ( neededClasses != [] and isFull(semester[2])):
                 schedule.append(semester[:])
                 total += len(semester[2])

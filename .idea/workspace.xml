@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6a63500-b22f-4d8b-ae80-cbe995352251" name="Default" comment="updated scheduling logic (still broken), updated CSS for login pg">
+    <list default="true" id="c6a63500-b22f-4d8b-ae80-cbe995352251" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mavAgenda/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mavAgenda/landing/templates/landing/createuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/landing/templates/landing/createuser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mavAgenda/landing/templates/landing/selectcourses.html" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/landing/templates/landing/selectcourses.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mavAgenda/landing/tests/test_UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/landing/tests/test_UI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mavAgenda/landing/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mavAgenda/landing/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +18,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+            <state relative-caret-position="16">
+              <caret line="208" column="90" lean-forward="true" selection-start-line="208" selection-start-column="90" selection-end-line="208" selection-end-column="90" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -34,7 +30,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mavAgenda/landing/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="1564">
               <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
             </state>
           </provider>
@@ -43,8 +39,8 @@
       <file leaf-file-name="test_logic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-29">
-              <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+            <state relative-caret-position="748">
+              <caret line="47" column="45" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -56,24 +52,19 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getCoursesForUser</find>
-      <find>schedule</find>
       <find>Fall</find>
       <find>generateNew</find>
       <find>semesterCourses</find>
       <find>createSc</find>
-      <find>getCourses</find>
       <find>checkP</find>
       <find>classesTaken</find>
       <find>getCompletedBy</find>
       <find>saveCl</find>
       <find>add</find>
-      <find>createSchedule</find>
       <find>checkPrereq</find>
       <find>getCompleted</find>
       <find>checkCourseValid</find>
       <find>checkPrereqs</find>
-      <find>createSched</find>
       <find>Completed</find>
       <find>Current</find>
       <find>getCoursesForUSer</find>
@@ -84,8 +75,13 @@
       <find>req</find>
       <find>reqs.all</find>
       <find>reqs.all()</find>
-      <find>generateCheck</find>
       <find>checkPre</find>
+      <find>generate</find>
+      <find>generateCheck</find>
+      <find>createSched</find>
+      <find>createSchedule</find>
+      <find>getCourses</find>
+      <find>createsc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,7 +116,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -130,6 +126,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,7 +171,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533484021247</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="better version of schedule algorithm (limit loop)">
+      <created>1533600314309</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1533600314309</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -300,11 +303,10 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4986577" weight="0.3298969" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32935917" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4972299" visible="true" weight="0.281296" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12147651" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4972299" visible="true" weight="1.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.102684565" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298969" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -315,6 +317,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298969" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +339,8 @@
     <MESSAGE value="updated to account for update in classes completed" />
     <MESSAGE value="correct link for schedule -&gt; selectcourses; template for major" />
     <MESSAGE value="updated scheduling logic (still broken), updated CSS for login pg" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated scheduling logic (still broken), updated CSS for login pg" />
+    <MESSAGE value="better version of schedule algorithm (limit loop)" />
+    <option name="LAST_COMMIT_MESSAGE" value="better version of schedule algorithm (limit loop)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
@@ -660,23 +664,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#71#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="1564">
           <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+        <state relative-caret-position="748">
+          <caret line="47" column="45" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -685,8 +686,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+        <state relative-caret-position="16">
+          <caret line="208" column="90" lean-forward="true" selection-start-line="208" selection-start-column="90" selection-end-line="208" selection-end-column="90" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
