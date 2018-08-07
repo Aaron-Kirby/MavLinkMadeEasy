@@ -74,7 +74,7 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
 def checkPrereqsMet(preqreqs, classesTaken):
     met = True
     for pr in preqreqs:
-        if pr not in classesTaken:
+        if pr.prereq not in classesTaken and pr.this_or not in classesTaken:
             met = False
             break
     return met
@@ -157,6 +157,11 @@ def isFull(courseList):
 @param uID: primary key associated with active user
 '''
 def createSchedule(uID):
+    englishwriting = 0
+    math = 0
+    publicspeaking = 0
+    natandphysscience = 0
+    loopCount = 0
     requiredClasses = getCoursesForUser(uID)
     print( "Required classes length:")
     print( len(requiredClasses) )
@@ -173,7 +178,9 @@ def createSchedule(uID):
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
     total = 0
-    while neededClasses != []:
+    while neededClasses != [] and loopCount < 10:
+        loopCount+=1
+        print( loopCount )
         print( "neededClasses now: %s" % len(neededClasses) )
         for nc in neededClasses:
             print( nc )
