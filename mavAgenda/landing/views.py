@@ -186,6 +186,11 @@ def createSchedule(uID):
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
     total = 0
+    scheduleComplete = True
+    for c in classesTaken:
+        for r in reqTracker:  # determine which Req this course falls under
+            if c in Req.objects.get(id=r[0]).course.all():
+                r[4] += c.credits  # increment the completed running total for that Req
     while neededClasses != [] and loopCount < 30:
         loopCount+=1
         print( loopCount )
@@ -200,16 +205,22 @@ def createSchedule(uID):
                 for r in reqTracker: # determine which Req this course falls under
                     if nc in Req.objects.get(id=r[0]).course.all():
                         r[4]+=nc.credits # increment the completed running total for that Req
-                        if r[3] <= r[4]: # determine if the max number of credits has been reached for that Req
-                            for c in neededClasses: # eliminate all the other courses in the Req from needed classes
-                                if c in Req.objects.get(id=r[0]).course.all():
-                                    neededClasses.remove(c)
             if ( neededClasses != [] and isFull(semester[2])):
                 schedule.append(semester[:])
                 total += len(semester[2])
                 semester = generateNewSemester(semester)
                 print( "Starting new semester!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 break
+            scheduleComplete = True
+            for r in reqTracker:
+                #print( r )
+                if r[3] > r[4]:
+                    scheduleComplete = False
+        for r in reqTracker:
+            print( r )
+        if scheduleComplete:
+            print( "BREAKING FREEEEEEE!!!!")
+            break
     schedule.append(semester[:])
     print("Schedule classes length:")
     print(total)
