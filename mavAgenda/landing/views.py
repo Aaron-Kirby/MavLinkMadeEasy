@@ -44,11 +44,17 @@ def getCompletedByUser(uID):
 @param uID: the primary key corresponding to the active user
 '''
 def getCoursesForUser(uID):
-    cu = User.objects.get(pk=uID)
     requiredCourses = []
-    for cc in cu.degree.req.all():
-        for r in cc.course.all():
-            requiredCourses.append(r)
+    reqs = Degree.objects.get(user=uID).req.all()
+    for r in reqs:
+        catalog = r.course.all()
+        for g in catalog:
+            requiredCourses.append(g)
+            prereqs = Course.objects.get(id=g.id).prereqs.all()
+            for pr in prereqs:
+                additionalCourse = Course.objects.get(id=pr.prereq.id)
+                if additionalCourse not in requiredCourses:
+                    requiredCourses.append(additionalCourse)
     print( "Number of required Courses:")
     print( len(requiredCourses) )
     return requiredCourses
@@ -180,7 +186,7 @@ def createSchedule(uID):
     semester = [ssfSemester, currentYear, []]
     currentSemester = generateNewSemester(semester)
     total = 0
-    while neededClasses != [] and loopCount < 15:
+    while neededClasses != [] and loopCount < 30:
         loopCount+=1
         print( loopCount )
         print( "neededClasses now: %s" % len(neededClasses) )
@@ -215,6 +221,7 @@ def createSchedule(uID):
 '''
 def generateCheckBoxEntities(uID):
     reqs = Degree.objects.get(user=uID).req.all()
+    total = 0
     checkBoxEntities = []
     for r in reqs:
         req_id = r.id
@@ -228,7 +235,9 @@ def generateCheckBoxEntities(uID):
             name = g.name
             creds = g.credits
             courseList.append([number,name,creds])
+            total+= 1
         checkBoxEntities.append([req_id, req_name, req_type, req_creds, courseList])
+    print( "Checkboxes: %s" % total)
     return checkBoxEntities
 
 '''

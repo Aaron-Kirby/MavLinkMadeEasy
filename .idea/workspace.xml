@@ -18,8 +18,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="208" column="90" lean-forward="true" selection-start-line="208" selection-start-column="90" selection-end-line="208" selection-end-column="90" />
+            <state relative-caret-position="-4">
+              <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -27,11 +27,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="query.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/django/db/models/query.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1153">
+              <caret line="406" column="47" lean-forward="true" selection-start-line="406" selection-start-column="47" selection-end-line="406" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mavAgenda/landing/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
-              <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
+            <state relative-caret-position="124">
+              <caret line="62" column="7" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -52,10 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Fall</find>
-      <find>generateNew</find>
-      <find>semesterCourses</find>
-      <find>createSc</find>
       <find>checkP</find>
       <find>classesTaken</find>
       <find>getCompletedBy</find>
@@ -70,7 +75,6 @@
       <find>getCoursesForUSer</find>
       <find>selectCourses</find>
       <find>selectcour</find>
-      <find>Prereq</find>
       <find>req.all()</find>
       <find>req</find>
       <find>reqs.all</find>
@@ -80,8 +84,13 @@
       <find>generateCheck</find>
       <find>createSched</find>
       <find>createSchedule</find>
-      <find>getCourses</find>
       <find>createsc</find>
+      <find>getCour</find>
+      <find>generateC</find>
+      <find>Course</find>
+      <find>Prereq</find>
+      <find>create</find>
+      <find>getCourses</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,6 +112,7 @@
         <option value="$PROJECT_DIR$/mavAgenda/landing/templates/landing/createuser.html" />
         <option value="$PROJECT_DIR$/mavAgenda/landing/tests/test_UI.py" />
         <option value="$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py" />
+        <option value="$PROJECT_DIR$/mavAgenda/landing/models.py" />
         <option value="$PROJECT_DIR$/mavAgenda/landing/views.py" />
       </list>
     </option>
@@ -291,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533600314309</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="determine Req credit quota logic for scheduling">
+      <created>1533646505864</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1533646505864</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -303,7 +320,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4986577" weight="0.3298969" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32935917" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4972299" visible="true" weight="1.0" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4972299" visible="true" weight="0.39911634" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.102684565" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -340,16 +357,10 @@
     <MESSAGE value="correct link for schedule -&gt; selectcourses; template for major" />
     <MESSAGE value="updated scheduling logic (still broken), updated CSS for login pg" />
     <MESSAGE value="better version of schedule algorithm (limit loop)" />
-    <option name="LAST_COMMIT_MESSAGE" value="better version of schedule algorithm (limit loop)" />
+    <MESSAGE value="determine Req credit quota logic for scheduling" />
+    <option name="LAST_COMMIT_MESSAGE" value="determine Req credit quota logic for scheduling" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5338">
-          <caret line="320" column="29" selection-start-line="320" selection-start-column="29" selection-end-line="320" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/templates/landing/selectcourses.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -667,13 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mavAgenda/landing/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1564">
-          <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/tests/test_logic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -684,10 +688,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/django/db/models/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1153">
+          <caret line="406" column="47" lean-forward="true" selection-start-line="406" selection-start-column="47" selection-end-line="406" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mavAgenda/landing/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="62" column="7" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mavAgenda/landing/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="208" column="90" lean-forward="true" selection-start-line="208" selection-start-column="90" selection-end-line="208" selection-end-column="90" />
+        <state relative-caret-position="-4">
+          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
