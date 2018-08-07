@@ -74,10 +74,15 @@ def removeCoursesTaken( requiredClasses, classesTaken ):
 @param classesTaken: a list of Course (objects) that the User has already completed
 @parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
 '''
-def checkPrereqsMet(preqreqs, classesTaken):
+def checkPrereqsMet(preqreqs, classesTaken, currentSemester):
     met = True
     for pr in preqreqs:
-        if pr.prereq not in classesTaken and pr.this_or not in classesTaken:
+        notInClassesTaken = pr.prereq not in classesTaken and pr.this_or not in classesTaken
+        inCurrentSemester = pr.prereq in currentSemester or pr.this_or in currentSemester
+        if notInClassesTaken:
+            met = False
+            break
+        elif inCurrentSemester:
             met = False
             break
     return met
@@ -100,10 +105,10 @@ def checkOfferedSemester(course, ssf):
 @parm scheduledClasses: a list of Course (objects) the scheduling algorithm has accounted for already
 @param ssf: the Spring, Summer, Fall, offering attribute of the Course
 '''
-def checkCourseValid(course, classesTaken, ssf): #checkCourseValid( nc, classesTaken, semesterCourses, ssfSemester )
+def checkCourseValid(course, classesTaken, semesterCourses, ssf): #checkCourseValid( nc, classesTaken, semesterCourses, ssfSemester )
     valid = False
     prereqs = course.prereqs.all()
-    prereqsMet = checkPrereqsMet(prereqs, classesTaken)
+    prereqsMet = checkPrereqsMet(prereqs, classesTaken, semesterCourses)
     offered = checkOfferedSemester(course, ssf)
     if prereqsMet and offered:
         valid = True
@@ -188,7 +193,7 @@ def createSchedule(uID):
     while neededClasses != [] and loopCount < maxLoopCount:
         loopCount+=1
         for nc in neededClasses:
-            if ( checkCourseValid( nc, classesTaken, ssfSemester ) ):
+            if ( checkCourseValid( nc, classesTaken, currentSemester[2], ssfSemester ) ):
                 currentSemester[2].append(nc)
                 classesTaken.append(nc)
                 neededClasses.remove(nc)
