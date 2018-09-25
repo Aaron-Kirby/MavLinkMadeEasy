@@ -56,8 +56,6 @@ function showMajorInfo( majors, num ) {
     return false;
 }
 function showMinorInfo(i) {
-   var container = document.getElementById("minor-info");
-   container.appendChild(document.createTextNode("Member " + (i+1)));
 }
 </script>
 
@@ -100,7 +98,7 @@ function showMinorInfo(i) {
 
         </div>
 
-        <button type="button" name="add-major-button" onclick="showMajorInfo( {{majors}}, 1 )">Add a major</button>
+        <button type="button" name="add-major-button" class="MAVbutton" onclick="showMajorInfo( {{majors}}, 1 )">add major</button>
 
         <br><br>
 
@@ -108,7 +106,7 @@ function showMinorInfo(i) {
 
         <div id="minor-info" display="block"></div>
 
-        <button type="button" name="add-minor-button" onclick="showMinorInfo( {{minors}}, 0 )">Add a minor</button>
+        <button type="button" name="add-minor-button" onclick="showMinorInfo( {{minors}}, 0 )">add minor</button>
 
         <br><br>
 
@@ -116,7 +114,7 @@ function showMinorInfo(i) {
 
         <div id="concentration-info" display="block"></div>
 
-        <button type="button" name="add-concentration-button" onclick="showConcentration( {{concentrations}}, 0 )">Add a concentration</button>
+        <button type="button" name="add-concentration-button" onclick="showConcentration( {{concentrations}}, 0 )">add concentration</button>
 
         <br><br>
 
