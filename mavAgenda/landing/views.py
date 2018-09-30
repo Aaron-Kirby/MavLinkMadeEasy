@@ -242,9 +242,33 @@ def generateMajorDD():
     allDegrees = Degree.objects.all()
     majors = []
     for d in allDegrees:
-        if d.major not in majors:
-            majors.append(d.major)
+        if d.degree_type == "MAJ" and d.degree_track not in majors:
+            majors.append(d.degree_track)
     return majors
+
+def generateMinorDD():
+    allDegrees = Degree.objects.all()
+    minors = []
+    for d in allDegrees:
+        if d.degree_type == "MIN" and d.degree_track not in minors:
+            minors.append(d.degree_track)
+    return minors
+
+def generateConcentrationsDD():
+    allDegrees = Degree.objects.all()
+    concentrations = []
+    for d in allDegrees:
+        if d.degree_type == "CON" and d.degree_track not in concentrations:
+            concentrations.append(d.degree_track)
+    return concentrations
+
+def generateDiplomaDD():
+    allDegrees = Degree.objects.all()
+    diplomas = []
+    for d in allDegrees:
+        if d.degree_diploma not in diplomas:
+            diplomas.append(d.degree_diploma)
+    return diplomas
 
 '''
 @emailFound provides feedback if the email is already in the User database table
@@ -341,26 +365,10 @@ def schedule(request, pk):
 '''
 def createuser(request):
     if request.method == "POST":
-        emailForm = EmailForm(request.POST, prefix = "e")
-        degreeForm = DegreeForm( request.POST, prefix = "d")
-        if emailForm.is_valid() and degreeForm.is_valid():
-            dF = degreeForm.save(commit=False)
-            eF = emailForm.save(commit=False)
-            selectedMajor = request.POST['d-major']
-            deg = getDegree(dF.degree, selectedMajor)
-            if emailFound(eF.email):
-                message = "Email already active"
-                emailForm = EmailForm(prefix="e")
-                degreeForm = DegreeForm(prefix="d")
-                majors = generateMajorDD()
-                return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'message': message, 'majors':majors})
-            else:
-                u = User(email = eF.email, degree=deg)
-                u.save()
-                userID = u.id
-                return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+        return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
     else:
-        emailForm = EmailForm(prefix="e")
-        degreeForm = DegreeForm(prefix="d")
-        majors = generateMajorDD()
-    return render(request, 'landing/createuser.html', {'emailForm': emailForm, 'degreeForm':degreeForm, 'majors':generateMajorDD()})
+        #userForm = UserForm(prefix="u")
+        #degreeForm = DegreeForm(prefix="d")
+        return render(request, 'landing/createuser.html',
+                  {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD()}
+                  )

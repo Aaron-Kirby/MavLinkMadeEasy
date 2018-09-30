@@ -6,10 +6,10 @@ from .models import *
 @EmailForm collection of fields to allow for user login with email address
 @forms.Form: associated data within fields
 '''
-#class EmailForm(forms.ModelForm):
-    #class Meta:
-        #model = User
-        #fields = ('email',)
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username','password',)
 
 '''
 @DegreeForm collection of fields to allow for user to specifiy degree

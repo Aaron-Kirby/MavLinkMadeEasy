@@ -25,12 +25,21 @@ function showSummerInfo() {
 function hideSummerInfo() {
     document.getElementById("summer-info").style.display = "none";
 }
-function showMajorInfo( majors, num ) {
+function showMajorInfo( diplomas, majors, num ) {
     var container = document.getElementById("major-info");
     var line = document.createElement("p");
     var dipHeader = document.createTextNode("Desired Diploma");
     var dip = document.createElement("select");
     var space = document.createElement("nbsp");
+    dip.id = "id_d-diploma-" + (num+1);
+    for (i=0; i<diplomas.length; i++ ) {
+        if (notSelected("id_d-diploma-", diplomas[i], num)) {
+            var dipChoice = document.createElement("option");
+            dipChoice.value = diplomas[i];
+            dipChoice.text = diplomas[i];
+            dip.appendChild(dipChoice);
+        }
+    }
     var majHeader = document.createTextNode("Major:");
     var maj = document.createElement("select");
     maj.id = "id_d-major-" + (num+1);
@@ -55,7 +64,55 @@ function showMajorInfo( majors, num ) {
     container.appendChild(line);
     return false;
 }
-function showMinorInfo(i) {
+function showMinorInfo(minors, num) {
+    var container = document.getElementById("minor-info");
+    var line = document.createElement("p");
+    var minHeader = document.createTextNode("Desired Minor");
+    var min = document.createElement("select");
+    var space = document.createElement("nbsp");
+    min.id = "id_d-minor-" + (num+1);
+    for (i=0; i<minors.length; i++ ) {
+        if (notSelected("id_d-minor-", minors[i], num)) {
+            var minChoice = document.createElement("option");
+            minChoice.value = minors[i];
+            minChoice.text = minors[i];
+            min.appendChild(minChoice);
+        }
+    }
+    var removeButton = document.createElement("button");
+    removeButton.setAttribute( "onclick", "removeInfo('minor-info')");
+    removeButton.innerHTML = "Remove Minor";
+    line.appendChild(minHeader);
+    line.appendChild(min);
+    line.appendChild(space);
+    line.appendChild(removeButton)
+    container.appendChild(line);
+    return false;
+}
+function showConcentrationInfo(concentrations, num) {
+    var container = document.getElementById("concentration-info");
+    var line = document.createElement("p");
+    var conHeader = document.createTextNode("Desired Concentration");
+    var con = document.createElement("select");
+    var space = document.createElement("nbsp");
+    con.id = "id_d-concentration-" + (num+1);
+    for (i=0; i<concentrations.length; i++ ) {
+        if (notSelected("id_d-concentration-", concentrations[i], num)) {
+            var conChoice = document.createElement("option");
+            conChoice.value = concentrations[i];
+            conChoice.text = concentrations[i];
+            con.appendChild(conChoice);
+        }
+    }
+    var removeButton = document.createElement("button");
+    removeButton.setAttribute( "onclick", "removeInfo('concentration-info')");
+    removeButton.innerHTML = "Remove Concentration";
+    line.appendChild(conHeader);
+    line.appendChild(con);
+    line.appendChild(space);
+    line.appendChild(removeButton)
+    container.appendChild(line);
+    return false;
 }
 </script>
 
@@ -69,7 +126,10 @@ function showMinorInfo(i) {
 
         <p class="errormessage" id="errormessage">{{message}}</p>
 
-        <p id="emailbox" name="emailbox" class="MAVselect">Email: {{emailForm.email}}</p>
+        <p id="emailbox" name="emailbox" class="MAVselect">Email:<input id="email"
+               minlength="1" required
+               placeholder="Email" />
+        </p>
 
         <p name ="password" class="MAVselect">Password: <input type="password" id="password"
                minlength="1" required
@@ -83,7 +143,13 @@ function showMinorInfo(i) {
         <div id="major-info" display="block">
 
             <p name="major-opts" class="MAVselect">
-                Desired Diploma: {{degreeForm.degree}}
+                Desired Diploma:
+                <select name="d-diploma" id="id_d-diploma-1">
+                    <option selected disabled>Choose here</option>
+                    {% for d in diplomas %}
+                        <option value="{{d}}">{{ d }}</option>
+                    {% endfor %}
+                </select>
 
                 <nbsp></nbsp>
                 Major:
@@ -98,7 +164,7 @@ function showMinorInfo(i) {
 
         </div>
 
-        <button type="button" name="add-major-button" class="MAVbutton" onclick="showMajorInfo( {{majors}}, 1 )">add major</button>
+        <button type="button" name="add-major-button" class="MAVbutton" onclick="showMajorInfo( {{diplomas}}, {{majors}}, 1 )">add major</button>
 
         <br><br>
 
@@ -114,7 +180,7 @@ function showMinorInfo(i) {
 
         <div id="concentration-info" display="block"></div>
 
-        <button type="button" name="add-concentration-button" onclick="showConcentration( {{concentrations}}, 0 )">add concentration</button>
+        <button type="button" name="add-concentration-button" onclick="showConcentrationInfo( {{concentrations}}, 0 )">add concentration</button>
 
         <br><br>
 
