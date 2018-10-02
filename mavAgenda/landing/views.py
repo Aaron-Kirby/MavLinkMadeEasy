@@ -15,7 +15,7 @@ from datetime import datetime
 def getUserByEmail(e):
     userTable = User.objects.all()
     for cu in userTable:
-        if cu.email == e:
+        if cu.username == e:
             return cu
 
 '''
@@ -322,19 +322,15 @@ def removeUserCompletedEnteries(uID):
 '''
 def login(request):
     if request.method == "POST":
-        emailForm = EmailForm(request.POST, prefix = "e")
-        if emailForm.is_valid():
-            eF = emailForm.save(commit=False)
-            if emailFound(eF.email):
-                u = getUserByEmail(eF.email)
-                userID = u.id
-                return HttpResponseRedirect(reverse('landing:schedule', args=(userID,)))
-            else:
-                emailForm = EmailForm(prefix="e")
-                message = "Email not found"
-                return render(request, 'landing/login.html', {'emailForm': emailForm, 'message':message})
+        e = request.POST['email-input']
+        if emailFound(e):
+            u = getUserByEmail(e)
+            userID = u.id
+            return HttpResponseRedirect(reverse('landing:schedule', args=(userID,)))
+        else:
+            message = "Email not found"
+            return render(request, 'landing/login.html', {'message':message})
     else:
-        #emailForm = EmailForm(prefix="e")
         return render(request, 'landing/login.html' )
 
 '''
