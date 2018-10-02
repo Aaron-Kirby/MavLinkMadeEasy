@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .forms import *
+from .models import *
+from django.contrib.auth.models import User
 
 from datetime import datetime
 
@@ -365,6 +367,11 @@ def schedule(request, pk):
 '''
 def createuser(request):
     if request.method == "POST":
+        e = request.POST['email-input']
+        p = request.POST['password-input']
+        u = User(username=e, password=p)
+        u.save()
+        userID = u.id
         return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
     else:
         #userForm = UserForm(prefix="u")
