@@ -334,8 +334,8 @@ def login(request):
                 message = "Email not found"
                 return render(request, 'landing/login.html', {'emailForm': emailForm, 'message':message})
     else:
-        emailForm = EmailForm(prefix="e")
-    return render(request, 'landing/login.html', {'emailForm': emailForm, })
+        #emailForm = EmailForm(prefix="e")
+        return render(request, 'landing/login.html' )
 
 '''
 @selectcourses send a request to render the selectcourses.html page
@@ -372,10 +372,34 @@ def createuser(request):
         u = User(username=e, password=p)
         u.save()
         userID = u.id
+        i = 1
+        while True:
+            diploma = 'id_d-diploma' + str(i)
+            major = 'id_d-major-' + str(i)
+            if major in request.POST:
+                    print(diploma)
+                    print(major) #this is where we will actually update the db
+                    i+=1
+            else:
+                break
+        i = 1
+        while True:
+            minor = 'id_d-minor' + str(i)
+            if minor in request.POST:
+                    print(minor) #this is where we will actually update the db
+                    i+=1
+            else:
+                break
+        i = 1
+        while True:
+            concentration = 'id_d-concentration' + str(i)
+            if concentration in request.POST:
+                print(concentration)  # this is where we will actually update the db
+                i += 1
+            else:
+                break
         return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
     else:
-        #userForm = UserForm(prefix="u")
-        #degreeForm = DegreeForm(prefix="d")
         return render(request, 'landing/createuser.html',
-                  {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD()}
-                  )
+                      {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD() }
+                      )

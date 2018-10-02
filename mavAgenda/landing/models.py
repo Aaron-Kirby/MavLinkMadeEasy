@@ -24,7 +24,7 @@ class Degree(models.Model):
         (MIN, 'Minor'),
         (CON, 'Concentration'),
     )
-    degree_type = models.CharField( max_length=50, choices=DIPLOMA_CHOICE, default=MAJ )
+    degree_type = models.CharField( max_length=50, choices=TYPE_CHOICE, default=MAJ )
     CSCI = 'Computer Science'
     MIS = 'Management Information Systems'
     BIOI = 'Bioinformatics'

@@ -32,17 +32,17 @@ function showMajorInfo( diplomas, majors, num ) {
     var dip = document.createElement("select");
     var space = document.createElement("nbsp");
     dip.id = "id_d-diploma-" + (num+1);
+    dip.name = "id_d-diploma-" + (num+1);
     for (i=0; i<diplomas.length; i++ ) {
-        if (notSelected("id_d-diploma-", diplomas[i], num)) {
             var dipChoice = document.createElement("option");
             dipChoice.value = diplomas[i];
             dipChoice.text = diplomas[i];
             dip.appendChild(dipChoice);
-        }
     }
     var majHeader = document.createTextNode("Major:");
     var maj = document.createElement("select");
     maj.id = "id_d-major-" + (num+1);
+    maj.name = "id_d-major-" + (num+1);
     for (i=0; i<majors.length; i++ ) {
         if ( notSelected("id_d-major-", majors[i], num) ) {
             var majChoice = document.createElement("option");
@@ -71,6 +71,7 @@ function showMinorInfo(minors, num) {
     var min = document.createElement("select");
     var space = document.createElement("nbsp");
     min.id = "id_d-minor-" + (num+1);
+    min.name = "id_d-minor-" + (num+1);
     for (i=0; i<minors.length; i++ ) {
         if (notSelected("id_d-minor-", minors[i], num)) {
             var minChoice = document.createElement("option");
@@ -96,6 +97,7 @@ function showConcentrationInfo(concentrations, num) {
     var con = document.createElement("select");
     var space = document.createElement("nbsp");
     con.id = "id_d-concentration-" + (num+1);
+    con.name = "id_d-concentration-" + (num+1);
     for (i=0; i<concentrations.length; i++ ) {
         if (notSelected("id_d-concentration-", concentrations[i], num)) {
             var conChoice = document.createElement("option");
@@ -110,7 +112,7 @@ function showConcentrationInfo(concentrations, num) {
     line.appendChild(conHeader);
     line.appendChild(con);
     line.appendChild(space);
-    line.appendChild(removeButton)
+    line.appendChild(removeButton);
     container.appendChild(line);
     return false;
 }
@@ -144,7 +146,7 @@ function showConcentrationInfo(concentrations, num) {
 
             <p name="major-opts" class="MAVselect">
                 Desired Diploma:
-                <select name="d-diploma" id="id_d-diploma-1">
+                <select name="d-diploma" name="id_d-diploma-1" id="id_d-diploma-1">
                     <option selected disabled>Choose here</option>
                     {% for d in diplomas %}
                         <option value="{{d}}">{{ d }}</option>
@@ -154,7 +156,7 @@ function showConcentrationInfo(concentrations, num) {
                 <nbsp></nbsp>
                 Major:
                 <!-- please leave this name and id as is... django backend related (see Lauren for questions) -->
-                <select name="d-major" id="id_d-major-1">
+                <select name="d-major" name="id_d-major-1" id="id_d-major-1">
                     <option selected disabled>Choose here</option>
                     {% for m in majors %}
                         <option value="{{m}}">{{ m }}</option>
