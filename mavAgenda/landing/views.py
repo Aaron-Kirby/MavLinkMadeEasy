@@ -23,10 +23,11 @@ def getUserByEmail(e):
 @param d: degree attribute of Degree being searched for
 @param m: major attribute of Degree being searched for
 '''
-def getDegree(d, m):
+def getDegree(diploma, type, track):
     degreeTable = Degree.objects.all()
     for deg in degreeTable:
-        if deg.major == m and deg.degree == d:
+        if deg.degree_diploma == diploma and deg.degree_type == type and deg.degree_track == track:
+            print("found!")
             return deg
 
 '''
@@ -369,29 +370,42 @@ def createuser(request):
         u.save()
         userID = u.id
         i = 1
+        print(request.POST)
         while True:
-            diploma = 'id_d-diploma' + str(i)
+            diploma = 'id_d-diploma-' + str(i)
             major = 'id_d-major-' + str(i)
             if major in request.POST:
-                    print(diploma)
-                    print(major) #this is where we will actually update the db
-                    i+=1
+                dip = request.POST[diploma]
+                maj = request.POST[major]
+                desiredDegree = getDegree(dip,"MAJ",maj)
+                desiredDegree.degree_users.add(u)
+                i+=1
             else:
                 break
         i = 1
         while True:
-            minor = 'id_d-minor' + str(i)
+            diploma = 'id_d-diploma-1'
+            minor = 'id_d-minor-' + str(i)
             if minor in request.POST:
-                    print(minor) #this is where we will actually update the db
-                    i+=1
+                print("true in minor")
+                dip = request.POST[diploma]
+                min = request.POST[minor]
+                desiredDegree = getDegree(dip, "MIN", min)
+                desiredDegree.degree_users.add(u)
+                i+=1
             else:
                 break
         i = 1
         while True:
-            concentration = 'id_d-concentration' + str(i)
+            diploma = 'id_d-diploma-1'
+            concentration = 'id_d-concentration-' + str(i)
             if concentration in request.POST:
-                print(concentration)  # this is where we will actually update the db
-                i += 1
+                print("true in concentration")
+                dip = request.POST[diploma]
+                con = request.POST[concentration]
+                desiredDegree = getDegree(dip, "CON", con)
+                desiredDegree.degree_users.add(u)
+                i+=1
             else:
                 break
         return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
