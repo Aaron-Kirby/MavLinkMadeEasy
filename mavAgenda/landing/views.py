@@ -27,7 +27,6 @@ def getDegree(diploma, type, track):
     degreeTable = Degree.objects.all()
     for deg in degreeTable:
         if deg.degree_diploma == diploma and deg.degree_type == type and deg.degree_track == track:
-            print("found!")
             return deg
 
 '''
@@ -329,10 +328,64 @@ def login(request):
             userID = u.id
             return HttpResponseRedirect(reverse('landing:schedule', args=(userID,)))
         else:
-            message = "Email not found"
+            message = "Email not found" # TODO - this is not working properly... it somehow does a check first?
             return render(request, 'landing/login.html', {'message':message})
     else:
         return render(request, 'landing/login.html' )
+
+'''
+@createuser send a request to render the createuser.html page
+@param request: generates the response
+'''
+def createuser(request):
+    if request.method == "POST": #TODO - need to confirm that at least one major was submitted!
+        e = request.POST['email-input']
+        p = request.POST['password-input']
+        u = User(username=e, password=p)
+        u.save()
+        userID = u.id
+        i = 1
+        print(request.POST)
+        while True:
+            diploma = 'id_d-diploma-' + str(i)
+            major = 'id_d-major-' + str(i)
+            if major in request.POST:
+                dip = request.POST[diploma]
+                maj = request.POST[major]
+                desiredDegree = getDegree(dip,"MAJ",maj)
+                desiredDegree.degree_users.add(u)
+                i+=1
+            else:
+                break
+        i = 1
+        while True:
+            diploma = 'id_d-diploma-1'
+            minor = 'id_d-minor-' + str(i)
+            if minor in request.POST:
+                dip = request.POST[diploma]
+                min = request.POST[minor]
+                desiredDegree = getDegree(dip, "MIN", min)
+                desiredDegree.degree_users.add(u)
+                i+=1
+            else:
+                break
+        i = 1
+        while True:
+            diploma = 'id_d-diploma-1'
+            concentration = 'id_d-concentration-' + str(i)
+            if concentration in request.POST:
+                dip = request.POST[diploma]
+                con = request.POST[concentration]
+                desiredDegree = getDegree(dip, "CON", con)
+                desiredDegree.degree_users.add(u)
+                i+=1
+            else:
+                break
+        return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+    else:
+        return render(request, 'landing/createuser.html',
+                      {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD() }
+                      )
 
 '''
 @selectcourses send a request to render the selectcourses.html page
@@ -357,59 +410,3 @@ def selectcourses(request, pk):
 '''
 def schedule(request, pk):
     return render(request, 'landing/schedule.html', {'schedule': createSchedule(pk), 'userID': pk})
-
-'''
-@createuser send a request to render the createuser.html page
-@param request: generates the response
-'''
-def createuser(request):
-    if request.method == "POST":
-        e = request.POST['email-input']
-        p = request.POST['password-input']
-        u = User(username=e, password=p)
-        u.save()
-        userID = u.id
-        i = 1
-        print(request.POST)
-        while True:
-            diploma = 'id_d-diploma-' + str(i)
-            major = 'id_d-major-' + str(i)
-            if major in request.POST:
-                dip = request.POST[diploma]
-                maj = request.POST[major]
-                desiredDegree = getDegree(dip,"MAJ",maj)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        i = 1
-        while True:
-            diploma = 'id_d-diploma-1'
-            minor = 'id_d-minor-' + str(i)
-            if minor in request.POST:
-                print("true in minor")
-                dip = request.POST[diploma]
-                min = request.POST[minor]
-                desiredDegree = getDegree(dip, "MIN", min)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        i = 1
-        while True:
-            diploma = 'id_d-diploma-1'
-            concentration = 'id_d-concentration-' + str(i)
-            if concentration in request.POST:
-                print("true in concentration")
-                dip = request.POST[diploma]
-                con = request.POST[concentration]
-                desiredDegree = getDegree(dip, "CON", con)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
-    else:
-        return render(request, 'landing/createuser.html',
-                      {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD() }
-                      )
