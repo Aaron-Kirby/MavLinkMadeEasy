@@ -190,106 +190,106 @@ function showConcentrationInfo(concentrations, num) {
 
         <p name ="fall-spring-credits" class="MAVselect">Please enter default values for fall and spring semesters</p>
 
-        <p name="FSmax" class="MAVselect">Minimum number of credit hours:
-        <select>
+        <p class="MAVselect">Minimum number of credit hours:
+        <select name="FSmin">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="1">5</option>
-            <option value="2">6</option>
-            <option value="3">7</option>
-            <option value="4">8</option>
-            <option value="1">9</option>
-            <option value="2">10</option>
-            <option value="3">11</option>
-            <option value="4" selected>12</option>
-            <option value="3">13</option>
-            <option value="4">14</option>
-            <option value="1">15</option>
-            <option value="2">16</option>
-            <option value="3">17</option>
-            <option value="4">18</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12" selected>12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
         </select>
         </p>
 
-        <p name="FSmax" class="MAVselect">Maximum number of credit hours:
-        <select>
+        <p class="MAVselect">Maximum number of credit hours:
+        <select name="FSmax">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="1">5</option>
-            <option value="2">6</option>
-            <option value="3">7</option>
-            <option value="4">8</option>
-            <option value="1">9</option>
-            <option value="2">10</option>
-            <option value="3">11</option>
-            <option value="4">12</option>
-            <option value="3">13</option>
-            <option value="4">14</option>
-            <option value="1">15</option>
-            <option value="2">16</option>
-            <option value="3">17</option>
-            <option value="4" selected>18</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7"">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18" selected>18</option>
         </select>
         </p>
 
         <br>
 
         <p name ="summer-credits" class="MAVselect">Do you prefer to take summer classes in general?
-            <input type="radio" name="summer-course" checked="checked" value="yes" onclick="showSummerInfo()"> Yes
-            <input type="radio" name="summer-course" value="no" onclick="hideSummerInfo()"> No
+            <input type="radio" name="summer-course" checked="checked" value="True" onclick="showSummerInfo()"> Yes
+            <input type="radio" name="summer-course" value="False" onclick="hideSummerInfo()"> No
         </p>
 
         <div id="summer-info">
 
-            <p name="Summax" class="MAVselect">Minimum number of credit hours:
-            <select>
+            <p class="MAVselect">Minimum number of credit hours:
+            <select name="Summin">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3" selected>3</option>
                 <option value="4">4</option>
-                <option value="1">5</option>
-                <option value="2">6</option>
-                <option value="3">7</option>
-                <option value="4">8</option>
-                <option value="1">9</option>
-                <option value="2">10</option>
-                <option value="3">11</option>
-                <option value="4">12</option>
-                <option value="3">13</option>
-                <option value="4">14</option>
-                <option value="1">15</option>
-                <option value="2">16</option>
-                <option value="3">17</option>
-                <option value="4">18</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
             </select>
             </p>
 
-            <p name="Summax" class="MAVselect">Maximum number of credit hours:
-            <select>
+            <p  class="MAVselect">Maximum number of credit hours:
+            <select name="Summax">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-                <option value="1">5</option>
-                <option value="2" selected>6</option>
-                <option value="3">7</option>
-                <option value="4">8</option>
-                <option value="1">9</option>
-                <option value="2">10</option>
-                <option value="3">11</option>
-                <option value="4">12</option>
-                <option value="3">13</option>
-                <option value="4">14</option>
-                <option value="1">15</option>
-                <option value="2">16</option>
-                <option value="3">17</option>
-                <option value="4">18</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
             </select>
             </p>
 

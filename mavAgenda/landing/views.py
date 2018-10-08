@@ -381,6 +381,21 @@ def createuser(request):
                 i+=1
             else:
                 break
+        prefSummer = request.POST['summer-course']
+        sumMin = 0
+        sumMax = 0
+        if prefSummer: #this part isn't working 100% yet
+            sumMin = request.POST['Summin']
+            sumMax = request.POST['Summax']
+        up = UserPreferences(
+            pref_minCredits = request.POST['FSmin'],
+            pref_maxCredits = request.POST['FSmax'],
+            pref_summer = prefSummer,
+            pref_summerMinCredits = sumMin,
+            pref_summerMaxCredits = sumMax,
+            pref_user = u
+        )
+        up.save()
         return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
     else:
         return render(request, 'landing/createuser.html',
