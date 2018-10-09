@@ -280,7 +280,7 @@ def emailFound(email):
     found = False
     userTable = User.objects.all()
     for cu in userTable:
-        if cu.email == email:
+        if cu.username == email:
             found = True
     return found
 
@@ -340,63 +340,69 @@ def login(request):
 def createuser(request):
     if request.method == "POST": #TODO - need to confirm that at least one major was submitted!
         e = request.POST['email-input']
-        p = request.POST['password-input']
-        u = User(username=e, password=p)
-        u.save()
-        userID = u.id
-        i = 1
-        print(request.POST)
-        while True:
-            diploma = 'id_d-diploma-' + str(i)
-            major = 'id_d-major-' + str(i)
-            if major in request.POST:
-                dip = request.POST[diploma]
-                maj = request.POST[major]
-                desiredDegree = getDegree(dip,"MAJ",maj)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        i = 1
-        while True:
-            diploma = 'id_d-diploma-1'
-            minor = 'id_d-minor-' + str(i)
-            if minor in request.POST:
-                dip = request.POST[diploma]
-                min = request.POST[minor]
-                desiredDegree = getDegree(dip, "MIN", min)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        i = 1
-        while True:
-            diploma = 'id_d-diploma-1'
-            concentration = 'id_d-concentration-' + str(i)
-            if concentration in request.POST:
-                dip = request.POST[diploma]
-                con = request.POST[concentration]
-                desiredDegree = getDegree(dip, "CON", con)
-                desiredDegree.degree_users.add(u)
-                i+=1
-            else:
-                break
-        prefSummer = request.POST['summer-course']
-        sumMin = 0
-        sumMax = 0
-        if prefSummer: #this part isn't working 100% yet
-            sumMin = request.POST['Summin']
-            sumMax = request.POST['Summax']
-        up = UserPreferences(
-            pref_minCredits = request.POST['FSmin'],
-            pref_maxCredits = request.POST['FSmax'],
-            pref_summer = prefSummer,
-            pref_summerMinCredits = sumMin,
-            pref_summerMaxCredits = sumMax,
-            pref_user = u
-        )
-        up.save()
-        return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+        if not emailFound(e) :
+            p = request.POST['password-input']
+            u = User(username=e, password=p)
+            u.save()
+            userID = u.id
+            i = 1
+            while True:
+                diploma = 'id_d-diploma-' + str(i)
+                major = 'id_d-major-' + str(i)
+                if major in request.POST:
+                    dip = request.POST[diploma]
+                    maj = request.POST[major]
+                    desiredDegree = getDegree(dip,"MAJ",maj)
+                    desiredDegree.degree_users.add(u)
+                    i+=1
+                else:
+                    break
+            i = 1
+            while True:
+                diploma = 'id_d-diploma-1'
+                minor = 'id_d-minor-' + str(i)
+                if minor in request.POST:
+                    dip = request.POST[diploma]
+                    min = request.POST[minor]
+                    desiredDegree = getDegree(dip, "MIN", min)
+                    desiredDegree.degree_users.add(u)
+                    i+=1
+                else:
+                    break
+            i = 1
+            while True:
+                diploma = 'id_d-diploma-1'
+                concentration = 'id_d-concentration-' + str(i)
+                if concentration in request.POST:
+                    dip = request.POST[diploma]
+                    con = request.POST[concentration]
+                    desiredDegree = getDegree(dip, "CON", con)
+                    desiredDegree.degree_users.add(u)
+                    i+=1
+                else:
+                    break
+            prefSummer = request.POST['summer-course']
+            sumMin = 0
+            sumMax = 0
+            if prefSummer: #this part isn't working 100% yet
+                sumMin = request.POST['Summin']
+                sumMax = request.POST['Summax']
+            up = UserPreferences(
+                pref_minCredits = request.POST['FSmin'],
+                pref_maxCredits = request.POST['FSmax'],
+                pref_summer = prefSummer,
+                pref_summerMinCredits = sumMin,
+                pref_summerMaxCredits = sumMax,
+                pref_user = u
+            )
+            up.save()
+            return HttpResponseRedirect(reverse('landing:selectcourses', args=(userID,)))
+        else:
+            message = "Email already taken"
+            return render(request, 'landing/createuser.html',
+                          {'diplomas': generateDiplomaDD(), 'majors': generateMajorDD(), 'minors': generateMinorDD(),
+                           'concentrations': generateConcentrationsDD(), 'message':message}
+                          )
     else:
         return render(request, 'landing/createuser.html',
                       {'diplomas':generateDiplomaDD(), 'majors':generateMajorDD(), 'minors':generateMinorDD(), 'concentrations':generateConcentrationsDD() }
