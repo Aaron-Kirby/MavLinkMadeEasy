@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load staticfiles %}
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static "landing/css/style.css" %}" />
-    <title>MavLINK Made Easy - Landing Page</title>
-</head>
+{% extends 'landing/base.html' %}
+{% block content %}
+<br>
+<div id="register" class="row">
+    <form class="email" id = "email" method="post">
+        {% csrf_token %}
 
-<body>
-<img src="{% static "/landing/img/MMElogo.jpg" %}" alt="Logo" width="190" height="170"/>
+        <p class="errormessage" id="errormessage">{{message}}</p>
+        <p id="emailbox" name="emailbox" class="submissionBox">Email:<input id="email-input" name="email-input"
+               minlength="1" required
+               placeholder="Email" />
+        </p>
 
-<form class="email" id = "email" action="{% url 'landing:schedule' %}" method="post">
-    {% csrf_token %}
+        {{emailForm.email}}
+            <br>
+            <input type="submit" value="login" class="MAVbutton"/>
+        </p>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p style="text-align: center">Don't have an account yet?</p>
+    <br>
+    <form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="get">
+        {% csrf_token %}
 
-    enter email
-    </br>
-    </br>
-    <input type="text" name="email"/>
-    <input type="submit" value="login" class="MAVbutton"  style="padding: 8px 8px"/>
-</form>
+        <input type="submit" value="register" class="MAVbutton"/>
+    </form>
+</div>
 
-</br>
-</br>
-
-<form class="joinnow" id = "joinnow" action="{% url 'landing:createuser' %}" method="post">
-    {% csrf_token %}
-
-    <p align="center">not a user?
-    <input type="submit" value="sign up!" class="MAVbutton"  style="padding: 8px 8px"/>
-    </p>
-</form>
-
-</body>
-</html>
+{% endblock %}
